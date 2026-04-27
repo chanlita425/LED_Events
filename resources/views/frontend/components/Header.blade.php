@@ -93,8 +93,16 @@
                         Stage Rental
                     </a>
 
+                    <a href="{{ route('services', ['type' => 'Sound']) }}">
+                        Sound System
+                    </a>
+
                     <a href="{{ route('services', ['type' => 'Lighting']) }}">
                         Lighting Production
+                    </a>
+
+                    <a href="{{ route('services', ['type' => 'Event']) }}">
+                        Full Event Production
                     </a>
 
                 </div>
@@ -233,23 +241,27 @@
 
                                 <div class="max-w-6xl mx-auto px-6 py-6 flex items-start gap-10 text-white">
 
-                                    <a href="{{ route('services') }}" class="hover:opacity-70">
-                                        All Services
-                                    </a>
+                                    <a href="{{ route('services') }}">All Services</a>
 
-                                    <a href="{{ route('services', ['type' => 'LED Screen']) }}"
-                                        class="hover:opacity-70">
-                                        LED Screen Retail
-                                    </a>
+                    <a href="{{ route('services', ['type' => 'LED Screen']) }}">
+                        LED Screen Retail
+                    </a>
 
-                                    <a href="{{ route('services', ['type' => 'Stage']) }}" class="hover:opacity-70">
-                                        Stage Rental
-                                    </a>
+                    <a href="{{ route('services', ['type' => 'Stage']) }}">
+                        Stage Rental
+                    </a>
 
-                                    <a href="{{ route('services', ['type' => 'Lighting']) }}"
-                                        class="hover:opacity-70">
-                                        Lighting Production
-                                    </a>
+                    <a href="{{ route('services', ['type' => 'Sound']) }}">
+                        Sound System
+                    </a>
+
+                    <a href="{{ route('services', ['type' => 'Lighting']) }}">
+                        Lighting Production
+                    </a>
+
+                    <a href="{{ route('services', ['type' => 'Event']) }}">
+                        Full Event Production
+                    </a>
 
                                 </div>
                             </div>

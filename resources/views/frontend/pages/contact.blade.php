@@ -7,7 +7,7 @@
 
 @section('content')
     {{-- HERO SECTION --}}
-    <div class="relative min-h-screen flex items-center justify-center bg-cover bg-center px-4 pt-28 p-4"
+    <div class="relative min-h-screen flex items-center justify-center bg-cover bg-center px-4 pt-28 p-4 lg:py-40 lg:px-10"
         style="background-image: url('{{ asset('images/hero-section.jpg') }}');">
 
         <!-- DARK OVERLAY -->
@@ -119,10 +119,7 @@
                     </div>
                 </div>
 
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3970.5699549247474!2d104.87179573768563!3d11.542808700220517!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31095100314815cd%3A0x37b11af29633e434!2sA2Z%20Business%20Center!5e0!3m2!1sen!2skh!4v1776927909252!5m2!1sen!2skh"
-                    style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-                    class="w-full h-full"></iframe>
+
 
             </div>
 

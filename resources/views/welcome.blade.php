@@ -181,7 +181,7 @@
         <div class="flex flex-col gap-10">
             @foreach ($project as $item)
                 <div class="relative w-full h-[300px] sm:h-[350px] md:h-[406px] bg-cover bg-center"
-                    style="background-image: url('{{ asset('storage/' . $item->image)}}');">
+                    style="background-image: url('{{ asset('storage/' . $item->image) }}');">
 
                     <!-- OVERLAY -->
                     <div class="absolute inset-0 bg-black/50 flex items-center">
@@ -262,10 +262,10 @@
             <div class="absolute inset-0 bg-black/50"></div>
 
             {{-- TEXT --}}
-            <div class="absolute inset-0 flex items-center justify-center text-white px-4 z-10">
+            <div class="absolute inset-0 flex items-center text-white px-4 z-10">
 
-                <p class="text-lg sm:text-2xl md:text-3xl text-center max-w-2xl">
-                    The Most Reliable Event Production System in Cambodia
+                <p class="text-lg sm:text-2xl md:text-3xl  px-40">
+                    The Most Reliable Event Production<br/> System in Cambodia
                 </p>
 
             </div>
@@ -277,10 +277,10 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
 
-                @foreach ($projects as $item)
+                @foreach ($blog as $item)
                     <!-- item -->
-                    <div class="relative group overflow-hidden">
-                        <img src="{{ asset('images/article1.jpg') }}"
+                    <a href="{{ route('blog.show', $item->id) }}" class="relative group overflow-hidden">
+                        <img src="{{ $item->image ? Storage::url($item->image) : asset('images/no-image.jpg') }}"
                             class="w-full h-52 sm:h-56 md:h-60 object-cover transition-transform duration-300 group-hover:scale-110">
 
                         <!-- overlay -->
@@ -290,23 +290,16 @@
                     transition duration-300 flex flex-col justify-end text-white p-4 cursor-pointer">
 
                             <p class="text-base sm:text-lg font-bold mb-1 sm:mb-2">
-                                Project Title
+                                {{ $item->title_en }}
                             </p>
 
                             <p class="text-xs sm:text-sm line-clamp-3 sm:line-clamp-4">
-                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
-                                tincidunt ut laoreet dolore magna aliquam erat volutpat.
+                                {{ $item->description_en }}
                             </p>
                         </div>
-                    </div>
+                    </a>
                 @endforeach
-
-
-
             </div>
-
-
-
         </div>
 
     </div>
