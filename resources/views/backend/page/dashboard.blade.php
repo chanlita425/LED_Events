@@ -182,67 +182,46 @@
     <div class="rounded-xl border border-white/5 bg-[#1a1a2e] overflow-hidden">
         <div class="flex items-center justify-between px-5 py-4 border-b border-white/5">
             <h2 class="text-sm font-semibold text-white">Recent Activity</h2>
-            <a href="#" class="text-xs text-orange-400 hover:text-orange-300 transition">View all</a>
+            <a href="{{ route('admin.activity-logs.index') }}" class="text-xs text-orange-400 hover:text-orange-300 transition">View all</a>
         </div>
         <div class="divide-y divide-white/5">
+            @forelse($activities as $a)
             @php
-            $activities = [
-                ['action' => 'New project added',        'detail' => 'Concert Event — Kuala Lumpur',    'time' => '2 min ago',   'type' => 'add'],
-                ['action' => 'Service content updated',  'detail' => 'LED Screen Rental description',   'time' => '1 hr ago',    'type' => 'edit'],
-                ['action' => 'Gallery image uploaded',   'detail' => '5 new photos in Behind Scenes',   'time' => '3 hrs ago',   'type' => 'upload'],
-                ['action' => 'Blog article published',   'detail' => 'Top 5 LED Tips for Concerts',     'time' => 'Yesterday',   'type' => 'publish'],
-                ['action' => 'Contact form received',    'detail' => 'Inquiry from client@example.com', 'time' => '2 days ago',  'type' => 'message'],
-            ];
+                $actionType = strtolower($a->action ?? '');
+                $isCreate = str_contains($actionType, 'create') || str_contains($actionType, 'add');
+                $isDelete = str_contains($actionType, 'delete');
+                $isUpdate = str_contains($actionType, 'update') || str_contains($actionType, 'edit');
             @endphp
-            @foreach($activities as $a)
             <div class="flex items-start gap-3 px-5 py-3.5 hover:bg-white/2 transition">
                 <div class="mt-0.5 w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0
-                    {{ $a['type'] === 'add'     ? 'bg-green-500/15 text-green-400'  : '' }}
-                    {{ $a['type'] === 'edit'    ? 'bg-blue-500/15 text-blue-400'    : '' }}
-                    {{ $a['type'] === 'upload'  ? 'bg-purple-500/15 text-purple-400': '' }}
-                    {{ $a['type'] === 'publish' ? 'bg-orange-500/15 text-orange-400': '' }}
-                    {{ $a['type'] === 'message' ? 'bg-yellow-500/15 text-yellow-400': '' }}">
-                    @if($a['type'] === 'add')
+                    {{ $isCreate ? 'bg-green-500/15 text-green-400' : ($isDelete ? 'bg-red-500/15 text-red-400' : 'bg-blue-500/15 text-blue-400') }}">
+                    @if($isCreate)
                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
-                    @elseif($a['type'] === 'edit')
-                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
-                    @elseif($a['type'] === 'upload')
-                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
-                    @elseif($a['type'] === 'publish')
-                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    @elseif($isDelete)
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
                     @else
-                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
                     @endif
                 </div>
                 <div class="flex-1 min-w-0">
-                    <p class="text-xs text-gray-300 font-medium truncate">{{ $a['action'] }}</p>
-                    <p class="text-[11px] text-gray-600 truncate">{{ $a['detail'] }}</p>
+                    <p class="text-xs text-gray-300 font-medium truncate">{{ $a->action }} {{ $a->model }}</p>
+                    <p class="text-[11px] text-gray-600 truncate">{{ $a->description }} — by {{ $a->user->name ?? 'System' }}</p>
                 </div>
-                <span class="text-[11px] text-gray-600 flex-shrink-0">{{ $a['time'] }}</span>
+                <span class="text-[11px] text-gray-600 flex-shrink-0">{{ $a->created_at->diffForHumans() }}</span>
             </div>
-            @endforeach
+            @empty
+            <div class="px-5 py-6 text-center text-xs text-gray-600">No recent activity.</div>
+            @endforelse
         </div>
     </div>
 
-    {{-- System / Content Status --}}
+    {{-- Content Sections Status --}}
     <div class="rounded-xl border border-white/5 bg-[#1a1a2e] overflow-hidden">
         <div class="flex items-center justify-between px-5 py-4 border-b border-white/5">
             <h2 class="text-sm font-semibold text-white">Content Sections</h2>
             <span class="text-xs text-gray-500">Status</span>
         </div>
         <div class="p-5 space-y-3">
-            @php
-            $sections = [
-                ['name' => 'Home Page',           'items' => 4, 'status' => 'active'],
-                ['name' => 'Services',            'items' => 5, 'status' => 'active'],
-                ['name' => 'Projects Gallery',    'items' => 0, 'status' => 'empty'],
-                ['name' => 'Blog Articles',       'items' => 0, 'status' => 'empty'],
-                ['name' => 'Products',            'items' => 0, 'status' => 'empty'],
-                ['name' => 'Why Us',              'items' => 5, 'status' => 'active'],
-                ['name' => 'Media Gallery',       'items' => 0, 'status' => 'empty'],
-                ['name' => 'Contact Info',        'items' => 1, 'status' => 'active'],
-            ];
-            @endphp
             @foreach($sections as $s)
             <div class="flex items-center justify-between py-1.5">
                 <span class="text-xs text-gray-400">{{ $s['name'] }}</span>
