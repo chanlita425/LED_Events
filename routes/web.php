@@ -51,8 +51,11 @@ Route::prefix('admin')
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // ── CMS ───────────────────────────────────────────────
-    Route::resource('menu-groups',   MenuGroupController::class);
+    Route::resource('menu-groups',   MenuGroupController::class); 
+
     Route::resource('menus',         MenuController::class)->except(['show']);
+
+
     Route::resource('pages',         PageController::class);
     Route::resource('page-sections', PageSectionController::class);
 
@@ -80,8 +83,10 @@ Route::prefix('admin')
     // ── Contact ───────────────────────────────────────────
     Route::get('/contact-info',    [ContactInfoController::class, 'index'])->name('contact-info.index');
     Route::put('/contact-info',    [ContactInfoController::class, 'update'])->name('contact-info.update');
+    
     Route::resource('contact-messages', ContactMessageController::class)->only(['index', 'show', 'update', 'destroy']);
-
+    Route::delete('/contact/{id}', [ContactMessageController::class, 'destroy'])
+        ->name('contact.destroy');
     // ── Logs ──────────────────────────────────────────────
     Route::resource('activity-logs', ActivityLogController::class)->only(['index', 'show', 'destroy']);
     Route::delete('/activity-logs',  [ActivityLogController::class, 'clear'])->name('activity-logs.clear');

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Cms;
 
 use App\Http\Controllers\Controller;
-use App\Models\MenuGroup;
+use App\Models\Cms\MenuGroup;
 use Illuminate\Http\Request;
 
 class MenuGroupController extends Controller
@@ -17,7 +17,7 @@ class MenuGroupController extends Controller
 
     public function create()
     {
-        return view('backend.page.menu-groups.create');
+        return view('backend.page.cms.menu-groups.create');
     }
 
     public function store(Request $request)
@@ -25,7 +25,7 @@ class MenuGroupController extends Controller
         $data = $request->validate([
             'slug'       => 'required|string|max:255|unique:menu_groups,slug',
             'name_en'    => 'required|string|max:255',
-            'name_km'    => 'required|string|max:255',
+            'name_km'    => 'nullable|string|max:255',
             'sort_order' => 'nullable|integer',
             'is_active'  => 'boolean',
         ]);
@@ -41,7 +41,7 @@ class MenuGroupController extends Controller
     {
         $group = MenuGroup::findOrFail($id);
 
-        return view('backend.page.menu-groups.edit', compact('group'));
+        return view('backend.page.cms.menu-groups.create', compact('group'));
     }
 
     public function update(Request $request, string $id)
@@ -51,9 +51,9 @@ class MenuGroupController extends Controller
         $data = $request->validate([
             'slug'       => 'required|string|max:255|unique:menu_groups,slug,' . $group->id,
             'name_en'    => 'required|string|max:255',
-            'name_km'    => 'required|string|max:255',
+            'name_km'    => 'nullable|string|max:255',
             'sort_order' => 'nullable|integer',
-            'is_active'  => 'boolean',
+            'is_active'  => 'sometimes|boolean',
         ]);
 
         $data['is_active'] = $request->boolean('is_active');
