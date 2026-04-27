@@ -51,8 +51,11 @@ Route::prefix('admin')
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // ── CMS ───────────────────────────────────────────────
-    Route::resource('menu-groups',   MenuGroupController::class);
+    Route::resource('menu-groups',   MenuGroupController::class); 
+
     Route::resource('menus',         MenuController::class)->except(['show']);
+
+
     Route::resource('pages',         PageController::class);
     Route::resource('page-sections', PageSectionController::class);
 

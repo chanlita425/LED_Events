@@ -111,7 +111,9 @@
         </div>
 
     @endforeach
-
+   {{-- DELETE MODAL --}}
+    @include('backend.components.destroy')
+            
 </div>
 
 @endsection

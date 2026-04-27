@@ -17,7 +17,7 @@ class MenuGroupController extends Controller
 
     public function create()
     {
-        return view('backend.page.menu-groups.create');
+        return view('backend.page.cms.menu-groups.create');
     }
 
     public function store(Request $request)
@@ -41,7 +41,7 @@ class MenuGroupController extends Controller
     {
         $group = MenuGroup::findOrFail($id);
 
-        return view('backend.page.menu-groups.edit', compact('group'));
+        return view('backend.page.cms.menu-groups.create', compact('group'));
     }
 
     public function update(Request $request, string $id)
