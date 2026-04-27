@@ -43,7 +43,7 @@
                         $isLeft = $loop->iteration % 2 == 1;
                     @endphp
 
-                    <div id="{{ $item->link }}"
+                    <div 
                         class="grid grid-cols-1 md:grid-cols-3 gap-10 items-center py-3 px-8 rounded-md border border-[#272727]
     {{ $isLeft ? 'bg-gradient-to-r from-white/10 to-black' : 'bg-gradient-to-r from-black to-white/10' }}">
                         @if ($isLeft)
