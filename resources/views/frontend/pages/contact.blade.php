@@ -7,7 +7,7 @@
 
 @section('content')
     {{-- HERO SECTION --}}
-    <div class="relative min-h-screen flex items-center justify-center bg-cover bg-center px-4 pt-28 p-4"
+    <div class="relative min-h-screen flex items-center justify-center lg:my-30 lg:mx-10 bg-cover bg-center px-4 pt-28 p-4"
         style="background-image: url('{{ asset('images/hero-section.jpg') }}');">
 
         <!-- DARK OVERLAY -->
@@ -89,40 +89,49 @@
                 {{-- SOCIAL ICONS --}}
                 <div class="flex justify-center  lg:justify-start">
 
-                    <div class="flex items-center gap-3 sm:gap-4">
+                    <div class="flex items-center gap-3 sm:gap-4 text-black">
 
-                        <a href="#"
-                            class="w-8 h-8 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
-                            <i class="fa-brands fa-youtube text-sm text-black"></i>
-                        </a>
+                        @foreach ($contact as $item)
+                            @if ($item->key_name === 'youtube')
+                                <a href="{{ $item->value_en }}"
+                                    class="w-7 h-7 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
+                                    <i class="fa-brands fa-square-youtube text-sm"></i>
+                                </a>
+                            @endif
 
-                        <a href="#"
-                            class="w-8 h-8 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
-                            <i class="fa-brands fa-facebook-f text-sm text-black"></i>
-                        </a>
+                            @if ($item->key_name === 'facebook')
+                                <a href="{{ $item->value_en }}"
+                                    class="w-7 h-7 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
+                                    <i class="fa-brands fa-facebook-f text-sm"></i>
+                                </a>
+                            @endif
 
-                        <a href="#"
-                            class="w-8 h-8 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
-                            <i class="fa-brands fa-tiktok text-sm text-black"></i>
-                        </a>
+                            @if ($item->key_name === 'tiktok')
+                                <a href="{{ $item->value_en }}"
+                                    class="w-7 h-7 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
+                                    <i class="fa-brands fa-tiktok text-sm"></i>
+                                </a>
+                            @endif
 
-                        <a href="#"
-                            class="w-8 h-8 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
-                            <i class="fa-brands fa-instagram text-sm text-black"></i>
-                        </a>
+                            @if ($item->key_name === 'instagram')
+                                <a href="{{ $item->value_en }}"
+                                    class="w-7 h-7 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
+                                    <i class="fa-brands fa-instagram text-sm"></i>
+                                </a>
+                            @endif
 
-                        <a href="#"
-                            class="w-8 h-8 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
-                            <i class="fa-brands fa-telegram text-sm text-black"></i>
-                        </a>
+                            @if ($item->key_name === 'telegram')
+                                <a href="{{ $item->value_en }}"
+                                    class="w-7 h-7 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
+                                    <i class="fa-brands fa-telegram text-sm"></i>
+                                </a>
+                            @endif
+                        @endforeach
 
                     </div>
                 </div>
 
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3970.5699549247474!2d104.87179573768563!3d11.542808700220517!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31095100314815cd%3A0x37b11af29633e434!2sA2Z%20Business%20Center!5e0!3m2!1sen!2skh!4v1776927909252!5m2!1sen!2skh"
-                    style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-                    class="w-full h-full"></iframe>
+
 
             </div>
 

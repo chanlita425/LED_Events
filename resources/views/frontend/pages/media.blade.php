@@ -3,7 +3,7 @@
 @section('content')
     {{-- HERO --}}
     <div class="relative h-screen flex items-center justify-center bg-cover bg-center px-4"
-        style="background-image: url('{{ asset('storage/' . $section->media_url)}}');">
+        style="background-image: url('{{ asset('storage/' . $section->media_url) }}');">
 
         <div class="absolute inset-0 bg-black/50"></div>
 
@@ -11,10 +11,10 @@
 
 
             <h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-[90px] font-bold">
-               {{ $activeType ?? $section->title_en }}
+                {{ $activeType ?? $section->title_en }}
             </h1>
 
-           <p class="mt-4 max-w-2xl mx-auto text-center leading-relaxed">
+            <p class="mt-4 max-w-2xl mx-auto text-center leading-relaxed">
                 {{ $section->subtitle_en }}
             </p>
 
@@ -105,108 +105,145 @@
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
-    @foreach($behind as $item)
-        <a href="{{ url('/media/'.$item->id) }}"
-           class="relative group overflow-hidden block">
+            @foreach ($behind as $item)
+                <a href="{{ url('/media/' . $item->id) }}" class="relative group overflow-hidden block">
 
-            <img src="{{ $item->image ? Storage::url($item->image) : asset('images/no-image.jpg') }}"
-                class="w-full h-60 object-cover transition-transform duration-300 group-hover:scale-110">
+                    <img src="{{ $item->image ? Storage::url($item->image) : asset('images/no-image.jpg') }}"
+                        class="w-full h-60 object-cover transition-transform duration-300 group-hover:scale-110">
 
-            <!-- overlay -->
-            <div class="absolute inset-0 bg-black/60
+                    <!-- overlay -->
+                    <div
+                        class="absolute inset-0 bg-black/60
                 opacity-0 group-hover:opacity-100
                 transition duration-300 flex flex-col justify-end text-white p-4">
 
-                <p class="text-lg font-bold mb-2">
-                    {{ $item->title_en }}
-                </p>
+                        <p class="text-lg font-bold mb-2">
+                            {{ $item->title_en }}
+                        </p>
 
-                <p class="text-sm line-clamp-3">
-                    {{ $item->description_en }}
-                </p>
-            </div>
+                        <p class="text-sm line-clamp-3">
+                            {{ $item->description_en }}
+                        </p>
+                    </div>
 
-        </a>
-    @endforeach
-</div>
+                </a>
+            @endforeach
+        </div>
     </div>
 
 
     {{-- JS --}}
     <script>
-        const mediaItems = @json($event);
+    const mediaItems = @json($event);
+    const container = document.getElementById("carousel");
 
-        const container = document.getElementById("carousel");
+    let currentIndex = 0;
 
-        let currentIndex = 0;
+    function getVisibleCards() {
+        if (window.innerWidth < 640) return 1;
+        if (window.innerWidth < 1024) return 2;
+        return 3;
+    }
 
-        function getVisibleCards() {
-            if (window.innerWidth < 640) return 1;
-            if (window.innerWidth < 1024) return 2;
-            return 3;
+    function convertToEmbed(url) {
+        if (!url) return "";
+
+        // YouTube watch or short link → embed
+        const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]+)/);
+
+        if (match) {
+            return `https://www.youtube.com/embed/${match[1]}`;
         }
 
-        function renderCards() {
-            container.innerHTML = "";
+        return url;
+    }
 
-            mediaItems.forEach(item => {
-                container.innerHTML += `
-            <div class="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 px-2">
-    <div class="bg-gradient-to-b from-[#383535] to-[#000000]
-        p-5 border border-[#272727] rounded-md
-        flex flex-col h-full"> <!-- IMPORTANT -->
+    function renderCards() {
+        container.innerHTML = "";
 
-        <img src="${item.image ? '/storage/' + item.image : '/images/no-image.jpg'}"
-             class="rounded-md w-full h-48 object-cover">
+        mediaItems.forEach(item => {
 
-        <div class="p-3 flex flex-col flex-1 text-white"> <!-- IMPORTANT -->
+            let mediaHtml = "";
 
-            <p class="font-bold">${item.title_en ?? ''}</p>
+            // ✅ VIDEO
+            if (item.link) {
+                const embedUrl = convertToEmbed(item.link);
 
-            <p class="text-sm mt-2 line-clamp-3">
-                ${item.description_en ?? ''}
-            </p>
+                mediaHtml = `
+                    <iframe
+                        class="w-full h-48 rounded-md"
+                        src="${embedUrl}?rel=0&modestbranding=1"
+                        frameborder="0"
+                        allow="autoplay; encrypted-media; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                `;
+            }
+            // ✅ IMAGE fallback
+            else {
+                mediaHtml = `
+                    <img src="${item.image ? '/storage/' + item.image : '/images/no-image.jpg'}"
+                         class="rounded-md w-full h-48 object-cover">
+                `;
+            }
 
-            <div class="mt-auto"> <!-- PUSH BUTTON DOWN -->
-                <a href="/media/${item.id}"
-   class="mt-4 border px-6 py-2 text-sm cursor-pointer w-fit inline-block">
-   Read More
-</a>
-            </div>
+            container.innerHTML += `
+                <div class="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 px-2">
+                    <div class="bg-gradient-to-b from-[#383535] to-[#000000]
+                        p-5 border border-[#272727] rounded-md
+                        flex flex-col h-full">
 
-        </div>
-    </div>
-</div>
+                        ${mediaHtml}
+
+                        <div class="p-3 flex flex-col flex-1 text-white">
+
+                            <p class="font-bold">${item.title_en ?? ''}</p>
+
+                            <p class="text-sm mt-2 line-clamp-3">
+                                ${item.description_en ?? ''}
+                            </p>
+
+                            <div class="mt-auto">
+                                <a href="/media/${item.id}"
+                                   class="mt-4 border px-6 py-2 text-sm w-fit inline-block">
+                                   Read More
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
             `;
-            });
-        }
-
-        function updateCarousel() {
-            const visible = getVisibleCards();
-            const percent = 100 / visible;
-            container.style.transform = `translateX(-${currentIndex * percent}%)`;
-        }
-
-        function nextSlide() {
-            const visible = getVisibleCards();
-            if (currentIndex < mediaItems.length - visible) {
-                currentIndex++;
-                updateCarousel();
-            }
-        }
-
-        function prevSlide() {
-            if (currentIndex > 0) {
-                currentIndex--;
-                updateCarousel();
-            }
-        }
-
-        window.addEventListener('resize', () => {
-            currentIndex = 0;
-            updateCarousel();
         });
+    }
 
-        renderCards();
-    </script>
+    function updateCarousel() {
+        const visible = getVisibleCards();
+        const percent = 100 / visible;
+        container.style.transform = `translateX(-${currentIndex * percent}%)`;
+    }
+
+    function nextSlide() {
+        const visible = getVisibleCards();
+
+        if (currentIndex < mediaItems.length - visible) {
+            currentIndex++;
+            updateCarousel();
+        }
+    }
+
+    function prevSlide() {
+        if (currentIndex > 0) {
+            currentIndex--;
+            updateCarousel();
+        }
+    }
+
+    window.addEventListener('resize', () => {
+        currentIndex = 0;
+        updateCarousel();
+    });
+
+    renderCards();
+</script>
 @endsection

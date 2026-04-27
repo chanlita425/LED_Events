@@ -124,12 +124,13 @@
         {{-- services --}}
         <div id="services" class="mt-16 max-w-6xl mx-auto px-5 mt-30">
             <h2 class="text-2xl md:text-[40px] uppercase font-bold">
-                Our LED Event Services
+                Our Services
             </h2>
 
             <p class="text-sm md:text-base mt-3">
-                Professional LED screen rental, stage production, lighting, and event display solutions in Cambodia.
-            </p>
+                LED Event Services Cambodia for corporate events, exhibitions, and concerts.
+                We provide high-quality LED screens and visual solutions to enhance audience engagement and event impact in
+                Phnom Penh.</p>
         </div>
 
 
@@ -181,7 +182,7 @@
         <div class="flex flex-col gap-10">
             @foreach ($project as $item)
                 <div class="relative w-full h-[300px] sm:h-[350px] md:h-[406px] bg-cover bg-center"
-                    style="background-image: url('{{ asset('storage/' . $item->image)}}');">
+                    style="background-image: url('{{ asset('storage/' . $item->image) }}');">
 
                     <!-- OVERLAY -->
                     <div class="absolute inset-0 bg-black/50 flex items-center">
@@ -192,8 +193,8 @@
                             <div
                                 class="max-w-xl {{ $loop->iteration % 2 == 0 ? 'ml-auto text-right' : 'mr-auto text-left' }}">
 
-                                <p class="text-lg sm:text-xl md:text-2xl font-bold">
-                                    Project {{ $loop->iteration < 10 ? '0' . $loop->iteration : $loop->iteration }}
+                                <p class="text-lg sm:text-xl md:text-2xl font-bold capitalize">
+                                    {{ $item->title_en }}
                                 </p>
 
                                 <p class="mt-3 text-sm sm:text-base md:text-lg line-clamp-3">
@@ -253,19 +254,20 @@
         <div class="relative w-full h-[300px] sm:h-[400px] md:h-[500px] overflow-hidden">
 
             {{-- VIDEO --}}
-            <iframe
+            {{-- <iframe
                 src="https://www.youtube.com/embed/b4e4_R6W8jA?autoplay=1&mute=1&loop=1&playlist=b4e4_R6W8jA&controls=0&rel=0&playsinline=1"
                 class="absolute inset-0 w-full h-full object-cover" frameborder="0" allow="autoplay; " allowfullscreen>
-            </iframe>
+            </iframe> --}}
+            <img src="{{ asset('images/project1.jpg') }}" alt="">
 
             {{-- DARK OVERLAY --}}
             <div class="absolute inset-0 bg-black/50"></div>
 
             {{-- TEXT --}}
-            <div class="absolute inset-0 flex items-center justify-center text-white px-4 z-10">
+            <div class="absolute inset-0 flex items-center  text-white px-4 z-10">
 
-                <p class="text-lg sm:text-2xl md:text-3xl text-center max-w-2xl">
-                    The Most Reliable Event Production System in Cambodia
+                <p class="text-lg sm:text-2xl md:text-3xl  px-40">
+                    The Most Reliable Event Production<br /> System in Cambodia
                 </p>
 
             </div>
@@ -277,10 +279,10 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
 
-                @foreach ($projects as $item)
+                @foreach ($blog as $item)
                     <!-- item -->
-                    <div class="relative group overflow-hidden">
-                        <img src="{{ asset('images/article1.jpg') }}"
+                    <a href="{{ route('blog.show', $item->id) }}" class="relative group overflow-hidden">
+                        <img src="{{ $item->image ? Storage::url($item->image) : asset('images/no-photo.png') }}"
                             class="w-full h-52 sm:h-56 md:h-60 object-cover transition-transform duration-300 group-hover:scale-110">
 
                         <!-- overlay -->
@@ -290,15 +292,14 @@
                     transition duration-300 flex flex-col justify-end text-white p-4 cursor-pointer">
 
                             <p class="text-base sm:text-lg font-bold mb-1 sm:mb-2">
-                                Project Title
+                                {{ $item->title_en }}
                             </p>
 
                             <p class="text-xs sm:text-sm line-clamp-3 sm:line-clamp-4">
-                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
-                                tincidunt ut laoreet dolore magna aliquam erat volutpat.
+                                {{ $item->description_en }}
                             </p>
                         </div>
-                    </div>
+                    </a>
                 @endforeach
 
 
@@ -316,7 +317,7 @@
 <script>
     document.addEventListener("DOMContentLoaded", () => {
 
-        const mediaItems = @json($event)
+        const mediaItems = @json($service)
 
         const container = document.getElementById("carousel");
         let currentIndex = 0;
@@ -349,7 +350,7 @@
             </p>
 
             <div class="mt-auto"> <!-- PUSH BUTTON DOWN -->
-                <a href="/media/${item.id}"
+                <a href="/service/${item.id}"
    class="mt-4 border px-6 py-2 text-sm cursor-pointer w-fit inline-block">
    Read More
 </a>
