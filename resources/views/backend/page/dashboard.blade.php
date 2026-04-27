@@ -182,7 +182,7 @@
     <div class="rounded-xl border border-white/5 bg-[#1a1a2e] overflow-hidden">
         <div class="flex items-center justify-between px-5 py-4 border-b border-white/5">
             <h2 class="text-sm font-semibold text-white">Recent Activity</h2>
-            <a href="{{ route('admin.activity-logs.index') }}" class="text-xs text-orange-400 hover:text-orange-300 transition">View all</a>
+            {{-- <a href="{{ route('admin.activity-logs.index') }}" class="text-xs text-orange-400 hover:text-orange-300 transition">View all</a> --}}
         </div>
         <div class="divide-y divide-white/5">
             @forelse($activities as $a)
