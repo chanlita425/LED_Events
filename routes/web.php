@@ -51,8 +51,11 @@ Route::prefix('admin')
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // ── CMS ───────────────────────────────────────────────
-    Route::resource('menu-groups',   MenuGroupController::class);
+    Route::resource('menu-groups',   MenuGroupController::class); 
+
     Route::resource('menus',         MenuController::class)->except(['show']);
+
+
     Route::resource('pages',         PageController::class);
     Route::resource('page-sections', PageSectionController::class);
 
@@ -80,8 +83,10 @@ Route::prefix('admin')
     // ── Contact ───────────────────────────────────────────
     Route::get('/contact-info',    [ContactInfoController::class, 'index'])->name('contact-info.index');
     Route::put('/contact-info',    [ContactInfoController::class, 'update'])->name('contact-info.update');
+    
     Route::resource('contact-messages', ContactMessageController::class)->only(['index', 'show', 'update', 'destroy']);
-
+    Route::delete('/contact/{id}', [ContactMessageController::class, 'destroy'])
+        ->name('contact.destroy');
     // ── Logs ──────────────────────────────────────────────
     Route::resource('activity-logs', ActivityLogController::class)->only(['index', 'show', 'destroy']);
     Route::delete('/activity-logs',  [ActivityLogController::class, 'clear'])->name('activity-logs.clear');
@@ -127,13 +132,13 @@ Route::get("/", function () {
                 ->limit(3)
                 ->get();
 
-    $projects = SectionItem::where('section_key','project')
+    $blog = SectionItem::where('section_key','blog')
                 ->where('is_active',1)
                 ->orderBy('sort_order')
                 ->limit(8)
                 ->get();
 
-    return view('welcome',compact(['section','contact','work','why_led','event','project','projects']));
+    return view('welcome',compact(['section','contact','work','why_led','event','project','blog']));
 })->name('home');
 
 Route::get('/services', function (\Illuminate\Http\Request $request) {
@@ -210,6 +215,8 @@ Route::get('/projects', function (\Illuminate\Http\Request $request) {
 
     $type = $request->get('type');
 
+    $showAll = $request->get('all'); // 👈 add this
+
     $query = SectionItem::where('section_key', 'project')
         ->where('is_active', 1)
         ->when($type, function ($q) use ($type) {
@@ -217,12 +224,17 @@ Route::get('/projects', function (\Illuminate\Http\Request $request) {
         })
         ->orderBy('sort_order');
 
-    $project = $query->get();
+    // 👇 LIMIT logic
+    if ($showAll) {
+        $project = $query->get();
+    } else {
+        $project = $query->limit(5)->get(); // or 3 if you want
+    }
 
     $section = PageSection::where('page','projects')
-    ->where('is_active',1)
-    ->orderBy('sort_order')
-    ->first();
+        ->where('is_active',1)
+        ->orderBy('sort_order')
+        ->first();
 
     return view('frontend.pages.projects', compact('project', 'type','section'));
 
