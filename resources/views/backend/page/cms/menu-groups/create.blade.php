@@ -68,9 +68,11 @@
                 </div>
 
                 {{-- ACTIVE --}}
+                <input type="hidden" name="is_active" value="0">
+
                 <label class="flex items-center gap-2 text-gray-300 text-sm">
-                    <input type="checkbox" name="is_active"
-                        {{ isset($group) && $group->is_active ? 'checked' : '' }}>
+                    <input type="checkbox" name="is_active" value="1"
+                        {{ old('is_active', isset($group) ? $group->is_active : true) ? 'checked' : '' }}>
                     Active
                 </label>
 

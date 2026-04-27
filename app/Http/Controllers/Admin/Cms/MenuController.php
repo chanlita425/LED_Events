@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin\Cms;
 
 use App\Http\Controllers\Controller;
-use App\Models\Menu;
-use App\Models\MenuGroup;
+use App\Models\Cms\Menu;
+use App\Models\Cms\MenuGroup;
 use Illuminate\Http\Request;
 
 class MenuController extends Controller
@@ -31,13 +31,15 @@ class MenuController extends Controller
             'menu_group_id' => 'nullable|exists:menu_groups,id',
             'slug'          => 'required|string|max:255|unique:menus,slug',
             'name_en'       => 'required|string|max:255',
-            'name_km'       => 'required|string|max:255',
+            'name_km'       => 'nullable|string|max:255',
             'route'         => 'nullable|string|max:255',
             'sort_order'    => 'nullable|integer',
             'is_active'     => 'nullable|boolean',
         ]);
 
-        $data['is_active'] = $request->boolean('is_active', true);
+        $data['is_active']     = $request->boolean('is_active', true);
+        $data['menu_group_id'] = $request->filled('menu_group_id') ? $data['menu_group_id'] : null;
+        $data['sort_order']    = $request->filled('sort_order') ? (int) $data['sort_order'] : 0;
 
         Menu::create($data);
 
@@ -62,10 +64,10 @@ public function update(Request $request, string $id)
         'menu_group_id' => 'nullable|exists:menu_groups,id',
         'slug'          => 'required|string|max:255|unique:menus,slug,' . $menu->id,
         'name_en'       => 'required|string|max:255',
-        'name_km'       => 'required|string|max:255',
+        'name_km'       => 'nullable|string|max:255',
         'route'         => 'nullable|string|max:255',
         'sort_order'    => 'nullable|integer',
-        'is_active'     => 'nullable|boolean',
+        'is_active'     => 'sometimes|boolean',
     ]);
 
     // checkbox handling

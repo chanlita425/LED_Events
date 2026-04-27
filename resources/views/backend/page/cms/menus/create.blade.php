@@ -31,6 +31,17 @@
 
             <div class="p-5 space-y-4">
 
+                {{-- VALIDATION ERRORS --}}
+                @if($errors->any())
+                    <div class="bg-red-500/10 border border-red-500/30 rounded px-4 py-3 text-sm text-red-400">
+                        <ul class="list-disc list-inside space-y-1">
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
                 {{-- GROUP --}}
                 <div>
                     <label class="text-gray-400 text-xs">Menu Group</label>
@@ -41,7 +52,7 @@
 
                         @foreach($groups as $group)
                             <option value="{{ $group->id }}"
-                                {{ isset($menu) && $menu->menu_group_id == $group->id ? 'selected' : '' }}>
+                                {{ old('menu_group_id', $menu->menu_group_id ?? '') == $group->id ? 'selected' : '' }}>
                                 {{ $group->name_en }}
                             </option>
                         @endforeach
@@ -53,31 +64,34 @@
                 <div>
                     <label class="text-gray-400 text-xs">Name (EN)</label>
                     <input type="text" name="name_en"
-                        value="{{ $menu->name_en ?? '' }}"
+                        value="{{ old('name_en', $menu->name_en ?? '') }}"
                         class="w-full mt-1 bg-gray-800 border border-gray-700 text-white rounded px-3 py-2">
+                    @error('name_en') <p class="text-red-400 text-xs mt-1">{{ $message }}</p> @enderror
                 </div>
 
                 {{-- NAME KM --}}
                 <div>
                     <label class="text-gray-400 text-xs">Name (KM)</label>
                     <input type="text" name="name_km"
-                        value="{{ $menu->name_km ?? '' }}"
+                        value="{{ old('name_km', $menu->name_km ?? '') }}"
                         class="w-full mt-1 bg-gray-800 border border-gray-700 text-white rounded px-3 py-2">
+                    @error('name_km') <p class="text-red-400 text-xs mt-1">{{ $message }}</p> @enderror
                 </div>
 
                 {{-- SLUG --}}
                 <div>
                     <label class="text-gray-400 text-xs">Slug</label>
                     <input type="text" name="slug"
-                        value="{{ $menu->slug ?? '' }}"
+                        value="{{ old('slug', $menu->slug ?? '') }}"
                         class="w-full mt-1 bg-gray-800 border border-gray-700 text-white rounded px-3 py-2">
+                    @error('slug') <p class="text-red-400 text-xs mt-1">{{ $message }}</p> @enderror
                 </div>
 
                 {{-- ROUTE --}}
                 <div>
                     <label class="text-gray-400 text-xs">Route</label>
                     <input type="text" name="route"
-                        value="{{ $menu->route ?? '' }}"
+                        value="{{ old('route', $menu->route ?? '') }}"
                         class="w-full mt-1 bg-gray-800 border border-gray-700 text-white rounded px-3 py-2">
                 </div>
 
@@ -85,16 +99,18 @@
                 <div>
                     <label class="text-gray-400 text-xs">Sort Order</label>
                     <input type="number" name="sort_order"
-                        value="{{ $menu->sort_order ?? '' }}"
+                        value="{{ old('sort_order', $menu->sort_order ?? 0) }}"
                         class="w-full mt-1 bg-gray-800 border border-gray-700 text-white rounded px-3 py-2">
                 </div>
 
                 {{-- ACTIVE --}}
-                <label class="flex items-center gap-2 text-gray-300 text-sm">
-                    <input type="checkbox" name="is_active"
-                        {{ isset($menu) && $menu->is_active ? 'checked' : '' }}>
-                    Active
-                </label>
+             <input type="hidden" name="is_active" value="0">
+
+<label class="flex items-center gap-2 text-gray-300 text-sm">
+    <input type="checkbox" name="is_active" value="1"
+        {{ old('is_active', isset($menu) ? $menu->is_active : true) ? 'checked' : '' }}>
+    Active
+</label>
 
                 {{-- ACTIONS --}}
                 <div class="flex justify-between pt-4 border-t border-gray-800">
