@@ -23,7 +23,7 @@ class ContactMessageController extends Controller
             $message->update(['status' => 'read']);
         }
 
-        return view('backend.page.contact.message-show', compact('message'));
+        return view('backend.page.contact.contact-messages.show', compact('message'));
     }
 
     public function store(Request $request)

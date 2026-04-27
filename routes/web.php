@@ -80,8 +80,10 @@ Route::prefix('admin')
     // ── Contact ───────────────────────────────────────────
     Route::get('/contact-info',    [ContactInfoController::class, 'index'])->name('contact-info.index');
     Route::put('/contact-info',    [ContactInfoController::class, 'update'])->name('contact-info.update');
+    
     Route::resource('contact-messages', ContactMessageController::class)->only(['index', 'show', 'update', 'destroy']);
-
+    Route::delete('/contact/{id}', [ContactMessageController::class, 'destroy'])
+        ->name('contact.destroy');
     // ── Logs ──────────────────────────────────────────────
     Route::resource('activity-logs', ActivityLogController::class)->only(['index', 'show', 'destroy']);
     Route::delete('/activity-logs',  [ActivityLogController::class, 'clear'])->name('activity-logs.clear');

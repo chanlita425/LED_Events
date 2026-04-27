@@ -57,8 +57,8 @@
         <x-admin.nav-item route="admin.settings.index">Settings</x-admin.nav-item>
 
         {{-- MEDIA SYSTEM --}}
-        <x-admin.nav-label>Media System</x-admin.nav-label>
-        <x-admin.nav-item route="admin.media.index">Media Files</x-admin.nav-item>
+        {{-- <x-admin.nav-label>Media System</x-admin.nav-label>
+        <x-admin.nav-item route="admin.media.index">Media Files</x-admin.nav-item> --}}
 
         {{-- NAVIGATION SYSTEM --}}
         <x-admin.nav-label>Navigation System</x-admin.nav-label>
@@ -68,7 +68,7 @@
         {{-- CONTACT SYSTEM --}}
         <x-admin.nav-label>Contact System</x-admin.nav-label>
         <x-admin.nav-item route="admin.contact-messages.index">Contact Messages</x-admin.nav-item>
-        <x-admin.nav-item route="admin.contact-info.index">Contact Info</x-admin.nav-item>
+        {{-- <x-admin.nav-item route="admin.contact-info.index">Contact Info</x-admin.nav-item> --}}
 
         {{-- TRACKING SYSTEM --}}
         {{-- <x-admin.nav-label>Tracking System</x-admin.nav-label>
