@@ -6,7 +6,6 @@
 @extends('frontend.layouts.main')
 
 @section('content')
-
     <!-- HERO -->
     <div class="relative h-[100vh] flex items-center justify-center bg-cover bg-center px-4"
         style="background-image: url('{{ asset('storage/' . $section->media_url) }}');">
@@ -38,59 +37,104 @@
 
 
 
-                @forelse ($service as $item)
-                    @php
-                        $isLeft = $loop->iteration % 2 == 1;
-                    @endphp
+                <!-- LED SCREEN RENTAL -->
+                <div id="led-screen-rental"
+                    class="grid grid-cols-1 md:grid-cols-3 gap-10 items-center py-3 px-8 rounded-md border border-[#272727] bg-gradient-to-r from-white/10 to-black">
 
-                    <div 
-                        class="grid grid-cols-1 md:grid-cols-3 gap-10 items-center py-3 px-8 rounded-md border border-[#272727]
-    {{ $isLeft ? 'bg-gradient-to-r from-white/10 to-black' : 'bg-gradient-to-r from-black to-white/10' }}">
-                        @if ($isLeft)
-                            {{-- IMAGE LEFT --}}
-                            @if ($item->image)
-                                <img src="{{ Storage::url($item->image) }}" alt="{{ $item->title_en }}"
-                                    class="md:col-span-2 w-full h-[276px] object-cover rounded-md"
-                                    alt={{ $item->title_en }}>
-                            @else
-                                <div
-                                    class="md:col-span-2 w-full h-[276px] bg-gray-800 flex items-center justify-center text-white text-sm">
-                                    No Image
-                                </div>
-                            @endif
+                    <img src="{{ asset('images/project1.jpg') }}"
+                        class="md:col-span-2 w-full h-[276px] object-cover rounded-md" alt="LED Screen Rental">
 
-                            <div>
-                                <h2 class="text-2xl font-bold">{{ $item->title_en }}</h2>
-                                <p class="mt-3 text-sm line-clamp-3">{{ $item->description_en }}</p>
-                                <a href="/contact" class="mt-4 inline-block border px-6 py-2">
-                                    Contact Us
-                                </a>
-                            </div>
-                        @else
-                            {{-- IMAGE RIGHT --}}
-                            <div>
-                                <h2 class="text-2xl font-bold">{{ $item->title_en }}</h2>
-                                <p class="mt-3 text-sm line-clamp-3">{{ $item->description_en }}</p>
-                                <a href="/contact" class="mt-4 inline-block border px-6 py-2">
-                                    Contact Us
-                                </a>
-                            </div>
-
-                            @if ($item->image)
-                                <img src="{{ Storage::url($item->image) }}" alt="{{ $item->title_en }}"
-                                    class="md:col-span-2 w-full h-[276px] object-cover rounded-md">
-                            @else
-                                <div
-                                    class="md:col-span-2 w-full h-[276px] bg-gray-800 flex items-center justify-center text-white text-sm">
-                                    No Image
-                                </div>
-                            @endif
-                        @endif
-
+                    <div>
+                        <h2 class="text-2xl font-bold">LED Screen Rental</h2>
+                        <p class="mt-3 text-sm">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. LED screen rental service for events,
+                            concerts, and corporate shows.
+                        </p>
+                        <a href="/contact" class="mt-4 inline-block border px-6 py-2">
+                            Contact Us
+                        </a>
                     </div>
-                @empty
-                    <p class="text-center">No services found.</p>
-                @endforelse
+                </div>
+
+
+                <!-- STAGE RENTAL -->
+                <div id="stage-rental"
+                    class="grid grid-cols-1 md:grid-cols-3 gap-10 items-center py-3 px-8 rounded-md border border-[#272727] bg-gradient-to-r from-black to-white/10">
+
+                    <div>
+                        <h2 class="text-2xl font-bold">Stage Rental</h2>
+                        <p class="mt-3 text-sm">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Professional stage setup for all event
+                            types.
+                        </p>
+                        <a href="/contact" class="mt-4 inline-block border px-6 py-2">
+                            Contact Us
+                        </a>
+                    </div>
+
+                    <img src="{{ asset('images/project1.jpg') }}"
+                        class="md:col-span-2 w-full h-[276px] object-cover rounded-md" alt="Stage Rental">
+                </div>
+
+
+                <!-- SOUND SYSTEM -->
+                <div id="sound-system"
+                    class="grid grid-cols-1 md:grid-cols-3 gap-10 items-center py-3 px-8 rounded-md border border-[#272727] bg-gradient-to-r from-white/10 to-black">
+
+                    <img src="{{ asset('images/project1.jpg') }}"
+                        class="md:col-span-2 w-full h-[276px] object-cover rounded-md" alt="Sound System">
+
+                    <div>
+                        <h2 class="text-2xl font-bold">Sound System</h2>
+                        <p class="mt-3 text-sm">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. High-quality sound systems for indoor
+                            and outdoor events.
+                        </p>
+                        <a href="/contact" class="mt-4 inline-block border px-6 py-2">
+                            Contact Us
+                        </a>
+                    </div>
+                </div>
+
+
+                <!-- LIGHTING PRODUCTION -->
+                <div id="lighting-production"
+                    class="grid grid-cols-1 md:grid-cols-3 gap-10 items-center py-3 px-8 rounded-md border border-[#272727] bg-gradient-to-r from-black to-white/10">
+
+                    <div>
+                        <h2 class="text-2xl font-bold">Lighting Production</h2>
+                        <p class="mt-3 text-sm">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Creative lighting solutions for events
+                            and shows.
+                        </p>
+                        <a href="/contact" class="mt-4 inline-block border px-6 py-2">
+                            Contact Us
+                        </a>
+                    </div>
+
+                    <img src="{{ asset('images/project1.jpg') }}"
+                        class="md:col-span-2 w-full h-[276px] object-cover rounded-md" alt="Lighting Production">
+                </div>
+
+
+                <!-- FULL EVENT PRODUCTION -->
+                <div id="full-event-production"
+                    class="grid grid-cols-1 md:grid-cols-3 gap-10 items-center py-3 px-8 rounded-md border border-[#272727] bg-gradient-to-r from-white/10 to-black">
+
+                    <img src="{{ asset('images/project1.jpg') }}"
+                        class="md:col-span-2 w-full h-[276px] object-cover rounded-md" alt="Full Event Production">
+
+                    <div>
+                        <h2 class="text-2xl font-bold">Full Event Production</h2>
+                        <p class="mt-3 text-sm">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Complete event production from planning
+                            to execution.
+                        </p>
+                        <a href="/contact" class="mt-4 inline-block border px-6 py-2">
+                            Contact Us
+                        </a>
+                    </div>
+                </div>
 
             </div>
         </div>
@@ -273,8 +317,4 @@
         </div>
 
     </div>
-
-
-
-
 @endsection
