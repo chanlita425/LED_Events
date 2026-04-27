@@ -43,19 +43,18 @@
                         $isLeft = $loop->iteration % 2 == 1;
                     @endphp
 
-                    <div
+                    <div id="{{ $item->link }}"
                         class="grid grid-cols-1 md:grid-cols-3 gap-10 items-center py-3 px-8 rounded-md border border-[#272727]
-        {{ $isLeft ? 'bg-gradient-to-r from-white/10 to-black' : 'bg-gradient-to-r from-black to-white/10' }}">
-
+    {{ $isLeft ? 'bg-gradient-to-r from-white/10 to-black' : 'bg-gradient-to-r from-black to-white/10' }}">
                         @if ($isLeft)
                             {{-- IMAGE LEFT --}}
                             @if ($item->image)
                                 <img src="{{ Storage::url($item->image) }}" alt="{{ $item->title_en }}"
-                                    class="md:col-span-2 w-full h-[250px] object-cover rounded-md"
+                                    class="md:col-span-2 w-full h-[276px] object-cover rounded-md"
                                     alt={{ $item->title_en }}>
                             @else
                                 <div
-                                    class="md:col-span-2 w-full h-[250px] bg-gray-800 flex items-center justify-center text-white text-sm">
+                                    class="md:col-span-2 w-full h-[276px] bg-gray-800 flex items-center justify-center text-white text-sm">
                                     No Image
                                 </div>
                             @endif
@@ -79,10 +78,10 @@
 
                             @if ($item->image)
                                 <img src="{{ Storage::url($item->image) }}" alt="{{ $item->title_en }}"
-                                    class="md:col-span-2 w-full h-[250px] object-cover rounded-md">
+                                    class="md:col-span-2 w-full h-[276px] object-cover rounded-md">
                             @else
                                 <div
-                                    class="md:col-span-2 w-full h-[250px] bg-gray-800 flex items-center justify-center text-white text-sm">
+                                    class="md:col-span-2 w-full h-[276px] bg-gray-800 flex items-center justify-center text-white text-sm">
                                     No Image
                                 </div>
                             @endif
@@ -261,7 +260,8 @@
                 {{-- card --}}
                 @foreach ($case as $item)
                     <div class="p-5 rounded-md border border-white">
-                        <img src="{{ $item->image ? Storage::url($item->image) : asset('images/no-image.jpg') }}" alt="{{ $item->title_en}}" class="w-[247px] h-[248px]">
+                        <img src="{{ $item->image ? Storage::url($item->image) : asset('images/no-image.jpg') }}"
+                            alt="{{ $item->title_en }}" class="w-[247px] h-[248px]">
                         <div class="flex flex-col gap-3 pt-5">
                             <p class="text-[30px]">{{ str_pad($item->sort_order, 2, '0', STR_PAD_LEFT) }}</p>
                             <p class="font-bold text-[20px] capitalize line-clamp-1">{{ $item->title_en }}</p>

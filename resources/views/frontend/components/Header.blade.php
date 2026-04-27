@@ -244,23 +244,23 @@
 
                                     <a href="{{ route('services') }}">All Services</a>
 
-                    <a href="{{ route('services', ['type' => 'LED Screen Rental']) }}">
+                    <a href="{{ route('services') }}">
                         LED Screen Rental
                     </a>
 
-                    <a href="{{ route('services', ['type' => 'Stage Rental']) }}">
+                    <a href="{{ route('services') }}">
                         Stage Rental
                     </a>
 
-                    <a href="{{ route('services', ['type' => 'Sound System']) }}">
+                    <a href="{{ route('services') }}">
                         Sound System
                     </a>
 
-                    <a href="{{ route('services', ['type' => 'Lighting Production']) }}">
+                    <a href="{{ route('services') }}">
                         Lighting Production
                     </a>
 
-                    <a href="{{ route('services', ['type' => 'Full Event Production']) }}">
+                    <a href="{{ route('services') }}">
                         Full Event Production
                     </a>
 

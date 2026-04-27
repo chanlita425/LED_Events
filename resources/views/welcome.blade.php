@@ -343,39 +343,40 @@
         }
 
         function renderCards() {
-            container.innerHTML = "";
+    container.innerHTML = "";
 
-            mediaItems.forEach(item => {
-                container.innerHTML += `
-            <div class="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 px-2">
-    <div class="bg-gradient-to-b from-[#383535] to-[#000000]
-        p-5 border border-[#272727] rounded-md
-        flex flex-col h-full"> <!-- IMPORTANT -->
+    mediaItems.forEach(item => {
+        container.innerHTML += `
+        <div class="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 px-2">
+            <div class="bg-gradient-to-b from-[#383535] to-[#000000]
+                p-5 border border-[#272727] rounded-md
+                flex flex-col h-full">
 
-        <img src="${item.image ? '/storage/' + item.image : '/images/no-image.jpg'}" alt=${item->title_en}
-             class="rounded-md w-full h-48 object-cover">
+                <img src="${item.image ? '/storage/' + item.image : '/images/no-image.jpg'}"
+                     alt="${item.title_en ?? ''}"
+                     class="rounded-md w-full h-48 object-cover">
 
-        <div class="p-3 flex flex-col flex-1 text-white"> <!-- IMPORTANT -->
+                <div class="p-3 flex flex-col flex-1 text-white">
 
-            <p class="font-bold">${item.title_en ?? ''}</p>
+                    <p class="font-bold">${item.title_en ?? ''}</p>
 
-            <p class="text-sm mt-2 line-clamp-3">
-                ${item.description_en ?? ''}
-            </p>
+                    <p class="text-sm mt-2 line-clamp-3">
+                        ${item.description_en ?? ''}
+                    </p>
 
-            <div class="mt-auto"> <!-- PUSH BUTTON DOWN -->
-                <a href="/service/${item.id}"
-   class="mt-4 border px-6 py-2 text-sm cursor-pointer w-fit inline-block">
-   Read More
-</a>
+                    <div class="mt-auto">
+                        <a href="/service/${item.id}"
+                           class="mt-4 border px-6 py-2 text-sm cursor-pointer w-fit inline-block">
+                           Read More
+                        </a>
+                    </div>
+
+                </div>
             </div>
-
         </div>
-    </div>
-</div>
-            `;
-            });
-        }
+        `;
+    });
+}
 
         function updateCarousel() {
             const visible = getVisibleCards();
