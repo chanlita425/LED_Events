@@ -89,32 +89,44 @@
                 {{-- SOCIAL ICONS --}}
                 <div class="flex justify-center  lg:justify-start">
 
-                    <div class="flex items-center gap-3 sm:gap-4">
+                    <div class="flex items-center gap-3 sm:gap-4 text-black">
 
-                        <a href="#"
-                            class="w-8 h-8 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
-                            <i class="fa-brands fa-youtube text-sm text-black"></i>
-                        </a>
+                        @foreach ($contact as $item)
+                            @if ($item->key_name === 'youtube')
+                                <a href="{{ $item->value_en }}"
+                                    class="w-7 h-7 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
+                                    <i class="fa-brands fa-square-youtube text-sm"></i>
+                                </a>
+                            @endif
 
-                        <a href="#"
-                            class="w-8 h-8 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
-                            <i class="fa-brands fa-facebook-f text-sm text-black"></i>
-                        </a>
+                            @if ($item->key_name === 'facebook')
+                                <a href="{{ $item->value_en }}"
+                                    class="w-7 h-7 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
+                                    <i class="fa-brands fa-facebook-f text-sm"></i>
+                                </a>
+                            @endif
 
-                        <a href="#"
-                            class="w-8 h-8 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
-                            <i class="fa-brands fa-tiktok text-sm text-black"></i>
-                        </a>
+                            @if ($item->key_name === 'tiktok')
+                                <a href="{{ $item->value_en }}"
+                                    class="w-7 h-7 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
+                                    <i class="fa-brands fa-tiktok text-sm"></i>
+                                </a>
+                            @endif
 
-                        <a href="#"
-                            class="w-8 h-8 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
-                            <i class="fa-brands fa-instagram text-sm text-black"></i>
-                        </a>
+                            @if ($item->key_name === 'instagram')
+                                <a href="{{ $item->value_en }}"
+                                    class="w-7 h-7 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
+                                    <i class="fa-brands fa-instagram text-sm"></i>
+                                </a>
+                            @endif
 
-                        <a href="#"
-                            class="w-8 h-8 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
-                            <i class="fa-brands fa-telegram text-sm text-black"></i>
-                        </a>
+                            @if ($item->key_name === 'telegram')
+                                <a href="{{ $item->value_en }}"
+                                    class="w-7 h-7 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
+                                    <i class="fa-brands fa-telegram text-sm"></i>
+                                </a>
+                            @endif
+                        @endforeach
 
                     </div>
                 </div>

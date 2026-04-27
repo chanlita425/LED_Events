@@ -85,23 +85,23 @@
 
                     <a href="{{ route('services') }}">All Services</a>
 
-                    <a href="{{ route('services', ['type' => 'LED Screen']) }}">
-                        LED Screen Retail
+                    <a href="{{ route('services', ['type' => 'LED Screen Rental']) }}">
+                        LED Screen Rental
                     </a>
 
-                    <a href="{{ route('services', ['type' => 'Stage']) }}">
+                    <a href="{{ route('services', ['type' => 'Stage Rental']) }}">
                         Stage Rental
                     </a>
 
-                    <a href="{{ route('services', ['type' => 'Sound']) }}">
+                    <a href="{{ route('services', ['type' => 'Sound System']) }}">
                         Sound System
                     </a>
 
-                    <a href="{{ route('services', ['type' => 'Lighting']) }}">
+                    <a href="{{ route('services', ['type' => 'Lighting Production']) }}">
                         Lighting Production
                     </a>
 
-                    <a href="{{ route('services', ['type' => 'Event']) }}">
+                    <a href="{{ route('services', ['type' => 'Full Event Production']) }}">
                         Full Event Production
                     </a>
 
@@ -116,9 +116,10 @@
 
                 <div id="projects-menu" class="submenu hidden mt-4 flex flex-col gap-3 text-lg pl-3">
                     <a href="/projects">All Projects</a>
-                    <a href="/projects#concert">Concert</a>
-                    <a href="/projects#corporate">Corporate</a>
-                    <a href="/projects#festival">Festival</a>
+                    <a href="/projects#concert">Concert Events</a>
+                    <a href="/projects#corporate">Corporate Events</a>
+                    <a href="/projects#festival">Festival Events</a>
+                    <a href="/projects#outdoor">Outdoor Events</a>
                 </div>
             </div>
 
@@ -243,23 +244,23 @@
 
                                     <a href="{{ route('services') }}">All Services</a>
 
-                    <a href="{{ route('services', ['type' => 'LED Screen']) }}">
-                        LED Screen Retail
+                    <a href="{{ route('services', ['type' => 'LED Screen Rental']) }}">
+                        LED Screen Rental
                     </a>
 
-                    <a href="{{ route('services', ['type' => 'Stage']) }}">
+                    <a href="{{ route('services', ['type' => 'Stage Rental']) }}">
                         Stage Rental
                     </a>
 
-                    <a href="{{ route('services', ['type' => 'Sound']) }}">
+                    <a href="{{ route('services', ['type' => 'Sound System']) }}">
                         Sound System
                     </a>
 
-                    <a href="{{ route('services', ['type' => 'Lighting']) }}">
+                    <a href="{{ route('services', ['type' => 'Lighting Production']) }}">
                         Lighting Production
                     </a>
 
-                    <a href="{{ route('services', ['type' => 'Event']) }}">
+                    <a href="{{ route('services', ['type' => 'Full Event Production']) }}">
                         Full Event Production
                     </a>
 
@@ -351,36 +352,36 @@
                     <div class="flex items-center gap-4 text-black">
                         @foreach ($contact as $item)
                             @if ($item->key_name === 'youtube')
-                                <a href="{{ $item->value_en }}"
-                                    class="w-7 h-7 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
-                                    <i class="fa-brands fa-square-youtube text-sm"></i>
+                                <a href="{{ $item->value_en }} "
+                                    class="animate-bounce w-7 h-7 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
+                                    <i class="fa-brands fa-square-youtube text-sm "></i>
                                 </a>
                             @endif
 
                             @if ($item->key_name === 'facebook')
                                 <a href="{{ $item->value_en }}"
-                                    class="w-7 h-7 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
+                                    class="animate-bounce w-7 h-7 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
                                     <i class="fa-brands fa-facebook-f text-sm"></i>
                                 </a>
                             @endif
 
                             @if ($item->key_name === 'tiktok')
                                 <a href="{{ $item->value_en }}"
-                                    class="w-7 h-7 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
+                                    class="animate-bounce w-7 h-7 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
                                     <i class="fa-brands fa-tiktok text-sm"></i>
                                 </a>
                             @endif
 
                             @if ($item->key_name === 'instagram')
                                 <a href="{{ $item->value_en }}"
-                                    class="w-7 h-7 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
+                                    class="animate-bounce w-7 h-7 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
                                     <i class="fa-brands fa-instagram text-sm"></i>
                                 </a>
                             @endif
 
                             @if ($item->key_name === 'telegram')
                                 <a href="{{ $item->value_en }}"
-                                    class="w-7 h-7 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
+                                    class="animate-bounce w-7 h-7 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
                                     <i class="fa-brands fa-telegram text-sm"></i>
                                 </a>
                             @endif

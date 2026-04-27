@@ -35,20 +35,39 @@
             <div class="flex flex-col md:items-center">
                 <p class="text-[20px] font-bold">Company</p>
                 <ul class="flex flex-col mt-5 gap-4">
+
                     <li><a href="/">Home</a></li>
                     <li><a href="/services">Services</a></li>
                     <li><a href="/projects">Projects</a></li>
                     <li><a href="/why-us">Why Us</a></li>
                     <li><a href="/media">Media</a></li>
                     <li><a href="/blog">Blog</a></li>
-                    <li><a href="">Products</a></li>
+
+                    {{-- PRODUCTS SECTION --}}
+                    <li class="mt-4 font-bold text-white">Products</li>
+
+                    <li>
+                        <a href="https://fog-website.com" target="_blank"
+                            class="text-gray-400 hover:text-white transition">
+                            Fog & Effect
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="https://ledmedia.com.kh/" target="_blank"
+                            class="text-gray-400 hover:text-white transition">
+                            LED Display Sale
+                        </a>
+                    </li>
+
                     <li><a href="/contact">Contact</a></li>
+
                 </ul>
             </div>
 
 
             {{-- right --}}
-            <div class="flex flex-col justify-between gap-10">
+            <div class="flex flex-col  gap-10">
 
                 <!-- CONTACT -->
                 <div>
@@ -57,11 +76,11 @@
                     <div class="flex flex-col mt-6 gap-5">
                         <p class="flex items-start gap-3 leading-relaxed">
                             <i class="fa-solid fa-location-dot mt-1"></i>
-                            #159A, Street 2011, Dei Thmey Village, Khmuonh Commune, Sen Sok District, Phnom Penh. 
+                            #159A, Street 2011, Dei Thmey Village, Khmuonh Commune, Sen Sok District, Phnom Penh.
                         </p>
 
                         <p class="flex items-center gap-3">
-                            <i class="fa-brands fa-telegram"></i>
+                            <i class="fa-solid fa-phone"></i>
                             015 999 235
                         </p>
 
@@ -123,29 +142,30 @@
     </div>
 
     <!-- BOTTOM BAR -->
-<div class="bg-black border-t border-gray-800">
-    <div class="max-w-6xl mx-auto px-4 py-6
+    <div class="bg-black border-t border-gray-800">
+        <div
+            class="max-w-6xl mx-auto px-4 py-6
         flex flex-col md:flex-row items-center justify-between gap-4 text-white text-sm">
 
-        <!-- LEFT -->
-        <div class="text-center md:text-left">
-            <p>© <span id="year"></span> LED EVENTS.</p>
-            <p class="text-gray-400">All rights reserved.</p>
+            <!-- LEFT -->
+            <div class="text-center md:text-left">
+                <p>© <span id="year"></span> LED EVENTS.</p>
+                <p class="text-gray-400">All rights reserved.</p>
+            </div>
+
+            <!-- RIGHT -->
+            <div class="flex items-center gap-6">
+                <a href="#" class="hover:underline text-gray-300 hover:text-white transition">
+                    Privacy Policy
+                </a>
+
+                <a href="#" class="hover:underline text-gray-300 hover:text-white transition">
+                    Terms of Service
+                </a>
+            </div>
+
         </div>
-
-        <!-- RIGHT -->
-        <div class="flex items-center gap-6">
-            <a href="#" class="hover:underline text-gray-300 hover:text-white transition">
-                Privacy Policy
-            </a>
-
-            <a href="#" class="hover:underline text-gray-300 hover:text-white transition">
-                Terms of Service
-            </a>
-        </div>
-
     </div>
-</div>
 
 </div>
 

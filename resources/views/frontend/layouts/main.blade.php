@@ -10,7 +10,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
 
-    <title>LED Events Cambodia | LED Display for Events, Supermarkets & Advertising</title>
+    <title>LED Events Cambodia</title>
 
     <meta name="description"
         content="LED Events provides high-quality LED screen rental and sales in Cambodia for events, concerts, exhibitions, supermarkets, and advertising displays. Reliable, bright, and professional LED display solutions.">

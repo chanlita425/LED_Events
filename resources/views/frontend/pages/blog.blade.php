@@ -37,7 +37,7 @@
                         <div class="flex flex-col gap-3">
                             <h2 class="text-2xl font-bold">{{ $item->title_en }}</h2>
                             <p class="mt-3 text-sm line-clamp-3">{{ $item->description_en }}</p>
-                            <a href="{{ route('blog.show', $item->id) }}"
+                            <a href="{{ route('blog.show', $item->id) }}" alt="{{ $item->title_en}}"
                                 class="mt-4 border px-6 py-2 cursor-pointer w-fit">
                                 Read More
                             </a>
@@ -52,7 +52,7 @@
                             </a>
                         </div>
 
-                        <img src="{{ $item->image ? Storage::url($item->image) : asset('images/no-photo.png') }}"
+                        <img src="{{ $item->image ? Storage::url($item->image) : asset('images/no-photo.png') }}" alt="{{ $item->title_en}}"
                             class="md:col-span-2 w-full h-[250px] object-cover">
                     @endif
 
