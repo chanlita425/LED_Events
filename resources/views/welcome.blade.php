@@ -20,14 +20,14 @@
 
                 <div class="relative z-10 flex flex-col items-center text-white text-center">
 
-                    {{-- <img src="{{ asset('images/logo.png') }}" alt="" class="w-10"> --}}
+                    <img src="{{ asset('images/logo.png') }}" alt="" class="w-10">
 
-                    <h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-[90px] uppercase leading-tight font-bold">
-                        {{ $item->title_en }}
+                    <h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-[90px] uppercase leading-tight ">
+                        <span class="font-bold">LED</span> Events
                     </h1>
 
                     <p class="mt-4 max-w-2xl mx-auto text-center leading-relaxed">
-                        {{ $item->subtitle_en }}
+                        The Most Reliable Event Production <br /> System in Cambodia
                     </p>
 
                     <div class="my-5 flex flex-col sm:flex-row gap-4 sm:gap-10">
@@ -272,28 +272,28 @@
             @if ($video)
                 <div class="relative w-full h-[300px] sm:h-[400px] md:h-[500px] overflow-hidden">
 
-            {{-- TEXT --}}
-            <div class="absolute inset-0 flex items-center  text-white px-4 z-10">
+                    {{-- TEXT --}}
+                    <div class="absolute inset-0 flex items-center  text-white px-4 z-10">
 
-                {{-- <p class="text-lg sm:text-2xl md:text-3xl  px-40">
+                        {{-- <p class="text-lg sm:text-2xl md:text-3xl  px-40">
                     The Most Reliable Event Production<br /> System in Cambodia
                 </p> --}}
-                    {{-- VIDEO --}}
-                    <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover">
-                        <source src="{{ asset('storage/' . $video->media_url) }}" type="video/mp4">
-                    </video>
+                        {{-- VIDEO --}}
+                        <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover">
+                            <source src="{{ asset('storage/' . $video->media_url) }}" type="video/mp4">
+                        </video>
 
-                    {{-- OVERLAY --}}
-                    <div class="absolute inset-0 bg-black/50"></div>
+                        {{-- OVERLAY --}}
+                        <div class="absolute inset-0 bg-black/50"></div>
 
-                    {{-- TEXT --}}
-                    <div class="absolute inset-0 flex items-center text-white px-4 z-10">
-                        <p class="text-lg sm:text-2xl md:text-3xl px-10 md:px-40">
-                            The Most Reliable Event Production<br /> System in Cambodia
-                        </p>
+                        {{-- TEXT --}}
+                        <div class="absolute inset-0 flex items-center text-white px-4 z-10">
+                            <p class="text-lg sm:text-2xl md:text-3xl px-10 md:px-40">
+                                The Most Reliable Event Production<br /> System in Cambodia
+                            </p>
+                        </div>
+
                     </div>
-
-                </div>
             @endif
 
 
@@ -309,7 +309,7 @@
                     <!-- item -->
                     <a href="{{ route('blog.show', $item->id) }}" class="relative group overflow-hidden">
                         <img src="{{ $item->image ? Storage::url($item->image) : asset('images/no-image.jpg') }}"
-                        alt="{{ $item->title_en}}"
+                            alt="{{ $item->title_en }}"
                             class="w-full h-52 sm:h-56 md:h-60 object-cover transition-transform duration-300 group-hover:scale-110">
 
                         <!-- overlay -->
@@ -350,10 +350,10 @@
         }
 
         function renderCards() {
-    container.innerHTML = "";
+            container.innerHTML = "";
 
-    mediaItems.forEach(item => {
-        container.innerHTML += `
+            mediaItems.forEach(item => {
+                container.innerHTML += `
         <div class="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 px-2">
             <div class="bg-gradient-to-b from-[#383535] to-[#000000]
                 p-5 border border-[#272727] rounded-md
@@ -382,8 +382,8 @@
             </div>
         </div>
         `;
-    });
-}
+            });
+        }
 
         function updateCarousel() {
             const visible = getVisibleCards();
