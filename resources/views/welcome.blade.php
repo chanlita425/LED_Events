@@ -136,16 +136,10 @@
             </h2>
 
             <p class="text-sm md:text-base mt-3">
-<<<<<<< HEAD
-                LED Event Services Cambodia for corporate events, exhibitions, and concerts.
-                We provide high-quality LED screens and visual solutions to enhance audience engagement and event impact in
-                Phnom Penh.</p>
-=======
                 LED Event Services Cambodia for corporate events, exhibitions, and concerts.<br />
                 We provide high-quality LED screens and visual solutions to enhance audience engagement and event impact in
                 Phnom Penh.
             </p>
->>>>>>> lysing
         </div>
 
 
@@ -314,12 +308,8 @@
                 @foreach ($blog as $item)
                     <!-- item -->
                     <a href="{{ route('blog.show', $item->id) }}" class="relative group overflow-hidden">
-<<<<<<< HEAD
-                        <img src="{{ $item->image ? Storage::url($item->image) : asset('images/no-photo.png') }}"
-=======
                         <img src="{{ $item->image ? Storage::url($item->image) : asset('images/no-image.jpg') }}"
                         alt="{{ $item->title_en}}"
->>>>>>> lysing
                             class="w-full h-52 sm:h-56 md:h-60 object-cover transition-transform duration-300 group-hover:scale-110">
 
                         <!-- overlay -->
@@ -381,13 +371,6 @@
                         ${item.description_en ?? ''}
                     </p>
 
-<<<<<<< HEAD
-            <div class="mt-auto"> <!-- PUSH BUTTON DOWN -->
-                <a href="/service/${item.id}"
-   class="mt-4 border px-6 py-2 text-sm cursor-pointer w-fit inline-block">
-   Read More
-</a>
-=======
                     <div class="mt-auto">
                         <a href="/service/${item.id}"
                            class="mt-4 border px-6 py-2 text-sm cursor-pointer w-fit inline-block">
@@ -396,7 +379,6 @@
                     </div>
 
                 </div>
->>>>>>> lysing
             </div>
         </div>
         `;
