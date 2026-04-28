@@ -3,7 +3,7 @@
 @section('content')
     {{-- HERO --}}
     <div class="relative h-screen flex items-center justify-center bg-cover bg-center px-4"
-        style="background-image: url('{{ asset('storage/' . $section->media_url) }}');">
+        style="background-image: url('{{ asset('storage/' . $section->media_url)}}');">
 
         <div class="absolute inset-0 bg-black/50"></div>
 
@@ -11,10 +11,10 @@
 
 
             <h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-[90px] font-bold">
-                {{ $activeType ?? $section->title_en }}
+               {{ $activeType ?? $section->title_en }}
             </h1>
 
-            <p class="mt-4 max-w-2xl mx-auto text-center leading-relaxed">
+           <p class="mt-4 max-w-2xl mx-auto text-center leading-relaxed">
                 {{ $section->subtitle_en }}
             </p>
 
@@ -105,30 +105,30 @@
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
-            @foreach ($behind as $item)
-                <a href="{{ url('/media/' . $item->id) }}" class="relative group overflow-hidden block">
+    @foreach($behind as $item)
+        <a href="{{ url('/media/'.$item->id) }}"
+           class="relative group overflow-hidden block">
 
             <img src="{{ $item->image ? Storage::url($item->image) : asset('images/no-image.jpg') }}" alt="{{ $item->title_en}}"
                 class="w-full h-60 object-cover transition-transform duration-300 group-hover:scale-110">
 
-                    <!-- overlay -->
-                    <div
-                        class="absolute inset-0 bg-black/60
+            <!-- overlay -->
+            <div class="absolute inset-0 bg-black/60
                 opacity-0 group-hover:opacity-100
                 transition duration-300 flex flex-col justify-end text-white p-4">
 
-                        <p class="text-lg font-bold mb-2">
-                            {{ $item->title_en }}
-                        </p>
+                <p class="text-lg font-bold mb-2">
+                    {{ $item->title_en }}
+                </p>
 
-                        <p class="text-sm line-clamp-3">
-                            {{ $item->description_en }}
-                        </p>
-                    </div>
+                <p class="text-sm line-clamp-3">
+                    {{ $item->description_en }}
+                </p>
+            </div>
 
-                </a>
-            @endforeach
-        </div>
+        </a>
+    @endforeach
+</div>
     </div>
 
 
