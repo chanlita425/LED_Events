@@ -241,6 +241,7 @@ Route::get('/blog/{id}',function ($id){
 Route::get('/projects', function (\Illuminate\Http\Request $request) {
 
     $type = $request->get('type');
+    $showAll = $request->get('all'); // 👈 important
 
     $query = SectionItem::where('section_key', 'project')
         ->where('is_active', 1);
@@ -249,14 +250,19 @@ Route::get('/projects', function (\Illuminate\Http\Request $request) {
         $query->whereRaw('LOWER(REPLACE(group_title, " ", "-")) = ?', [$type]);
     }
 
-    $project = $query->orderBy('sort_order')->get();
+    // ✅ CONTROL LIMIT HERE
+    if ($showAll) {
+        $project = $query->orderBy('sort_order')->get(); // show ALL
+    } else {
+        $project = $query->orderBy('sort_order')->limit(4)->get(); // show 3–4
+    }
 
     $section = PageSection::where('page','projects')
         ->where('is_active',1)
         ->orderBy('sort_order')
         ->first();
 
-    return view('frontend.pages.projects', compact('project', 'type','section'));
+    return view('frontend.pages.projects', compact('project', 'type','section','showAll'));
 })->name('projects');
 
 Route::get('/project/{id}', function ($id){
