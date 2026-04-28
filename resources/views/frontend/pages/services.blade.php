@@ -29,7 +29,7 @@
         class="py-30 relative overflow-hidden text-white
     bg-[radial-gradient(circle_at_center,_black_40%,_#1100FF33_100%)]">
         <div class="max-w-6xl mx-auto">
-            <h2 class="text-2xl sm:text-3xl md:text-[40px] font-bold pb-10 sm:pb-16">
+            <h2 class="text-2xl sm:text-3xl md:text-[40px] font-bold pb-10 sm:pb-16 px-3">
                 What We Provide
             </h2>
 
@@ -296,20 +296,25 @@
 
         {{-- case example --}}
         <div class="max-w-6xl mx-auto">
-            <h2 class="text-2xl sm:text-3xl md:text-[40px] font-bold py-30 sm:pb-16">
+            <h2 class="text-2xl sm:text-3xl md:text-[40px] font-bold py-10 md:py-30 sm:pb-16 px-3 ">
                 Case Example
             </h2>
 
-            <div class="grid grid-cols-4 gap-3">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 px-3">
                 {{-- card --}}
                 @foreach ($case as $item)
                     <div class="p-5 rounded-md border border-white">
                         <img src="{{ $item->image ? Storage::url($item->image) : asset('images/no-image.jpg') }}"
-                            alt="{{ $item->title_en }}" class="w-[247px] h-[248px]">
+                            alt="{{ $item->title_en }}" class="w-full h-[248px] object-cover">
                         <div class="flex flex-col gap-3 pt-5">
                             <p class="text-[30px]">{{ str_pad($item->sort_order, 2, '0', STR_PAD_LEFT) }}</p>
                             <p class="font-bold text-[20px] capitalize line-clamp-1">{{ $item->title_en }}</p>
                             <p class="line-clamp-5">{{ $item->description_en }}</p>
+                            <a href="{{ route('projects', [
+                                'type' => Str::slug($item->title_en),
+                            ]) }}" class="border border-white py-3 flex items-center justify-center">
+                                Find More
+                            </a>
                         </div>
                     </div>
                 @endforeach

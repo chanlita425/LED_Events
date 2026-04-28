@@ -114,11 +114,19 @@
                 </button>
 
                 <div id="projects-menu" class="submenu hidden mt-4 flex flex-col gap-3 text-lg pl-3">
-                    <a href="/projects">All Projects</a>
-                    <a href="/projects#concert">Concert Events</a>
-                    <a href="/projects#corporate">Corporate Events</a>
-                    <a href="/projects#festival">Festival Events</a>
-                    <a href="/projects#outdoor">Outdoor Events</a>
+                    <a href="{{ route('projects') }}" class="nav-link">All Projects</a>
+                    <a href="{{ route('projects', ['type' => 'concert-events']) }}" class="nav-link">
+                        Concert Events
+                    </a>
+                    <a href="{{ route('projects', ['type' => 'corporate-events']) }}" class="nav-link">
+                        Corporate Events
+                    </a>
+                    <a href="{{ route('projects', ['type' => 'festival-events']) }}" class="nav-link">
+                        Festival Events
+                    </a>
+                    <a href="{{ route('projects', ['type' => 'outdoor-events']) }}" class="nav-link">
+                        Outdoor Events
+                    </a>
                 </div>
             </div>
 
@@ -243,25 +251,25 @@
 
 
 
-                    <a href="/services#led-screen-rental">
-                        LED Screen Rental
-                    </a>
+                                    <a href="/services#led-screen-rental">
+                                        LED Screen Rental
+                                    </a>
 
-                    <a href="/services#stage-rental">
-                        Stage Rental
-                    </a>
+                                    <a href="/services#stage-rental">
+                                        Stage Rental
+                                    </a>
 
-                    <a href="/services#sound-system">
-                        Sound System
-                    </a>
+                                    <a href="/services#sound-system">
+                                        Sound System
+                                    </a>
 
-                    <a href="/services#lighting-production">
-                        Lighting Production
-                    </a>
+                                    <a href="/services#lighting-production">
+                                        Lighting Production
+                                    </a>
 
-                    <a href="/services#full-event-production">
-                        Full Event Production
-                    </a>
+                                    <a href="/services#full-event-production">
+                                        Full Event Production
+                                    </a>
 
                                 </div>
                             </div>
@@ -271,18 +279,18 @@
                                 class="absolute left-0 top-full w-full bg-black/95 border-t border-gray-800 opacity-70 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 ">
                                 <div class="max-w-6xl mx-auto px-6 py-6 flex items-start gap-10 text-white">
                                     <a href="{{ route('projects') }}" class="nav-link">All Projects</a>
-                                    <a href="{{ route('projects', ['type' => 'Concert Events']) }}" class="nav-link">
+                                    <a href="{{ route('projects', ['type' => 'concert-events']) }}" class="nav-link">
                                         Concert Events
                                     </a>
-                                    <a href="{{ route('projects', ['type' => 'Corporate Events']) }}"
+                                    <a href="{{ route('projects', ['type' => 'corporate-events']) }}"
                                         class="nav-link">
                                         Corporate Events
                                     </a>
-                                    <a href="{{ route('projects', ['type' => 'Festival Events']) }}"
+                                    <a href="{{ route('projects', ['type' => 'festival-events']) }}"
                                         class="nav-link">
                                         Festival Events
                                     </a>
-                                    <a href="{{ route('projects', ['type' => 'Outdoor Events']) }}" class="nav-link">
+                                    <a href="{{ route('projects', ['type' => 'outdoor-events']) }}" class="nav-link">
                                         Outdoor Events
                                     </a>
                                 </div>

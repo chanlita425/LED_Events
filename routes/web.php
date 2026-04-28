@@ -242,21 +242,14 @@ Route::get('/projects', function (\Illuminate\Http\Request $request) {
 
     $type = $request->get('type');
 
-    $showAll = $request->get('all'); // 👈 add this
-
     $query = SectionItem::where('section_key', 'project')
-        ->where('is_active', 1)
-        ->when($type, function ($q) use ($type) {
-            $q->where('group_title', $type);
-        })
-        ->orderBy('sort_order');
+        ->where('is_active', 1);
 
-    // 👇 LIMIT logic
-    if ($showAll) {
-        $project = $query->get();
-    } else {
-        $project = $query->limit(5)->get(); // or 3 if you want
+    if ($type) {
+        $query->whereRaw('LOWER(REPLACE(group_title, " ", "-")) = ?', [$type]);
     }
+
+    $project = $query->orderBy('sort_order')->get();
 
     $section = PageSection::where('page','projects')
         ->where('is_active',1)
@@ -264,7 +257,6 @@ Route::get('/projects', function (\Illuminate\Http\Request $request) {
         ->first();
 
     return view('frontend.pages.projects', compact('project', 'type','section'));
-
 })->name('projects');
 
 Route::get('/project/{id}', function ($id){
