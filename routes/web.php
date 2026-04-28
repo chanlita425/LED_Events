@@ -52,7 +52,10 @@ Route::prefix('admin')
 
     // ── CMS ───────────────────────────────────────────────
     Route::resource('menu-groups',   MenuGroupController::class);
+
     Route::resource('menus',         MenuController::class)->except(['show']);
+
+
     Route::resource('pages',         PageController::class);
     Route::resource('page-sections', PageSectionController::class);
 
@@ -80,8 +83,10 @@ Route::prefix('admin')
     // ── Contact ───────────────────────────────────────────
     Route::get('/contact-info',    [ContactInfoController::class, 'index'])->name('contact-info.index');
     Route::put('/contact-info',    [ContactInfoController::class, 'update'])->name('contact-info.update');
-    Route::resource('contact-messages', ContactMessageController::class)->only(['index', 'show', 'update', 'destroy']);
 
+    Route::resource('contact-messages', ContactMessageController::class)->only(['index', 'show', 'update', 'destroy']);
+    Route::delete('/contact/{id}', [ContactMessageController::class, 'destroy'])
+        ->name('contact.destroy');
     // ── Logs ──────────────────────────────────────────────
     Route::resource('activity-logs', ActivityLogController::class)->only(['index', 'show', 'destroy']);
     Route::delete('/activity-logs',  [ActivityLogController::class, 'clear'])->name('activity-logs.clear');
@@ -100,6 +105,11 @@ Route::get("/", function () {
                 ->get()
                 ->groupBy('section_key');
 
+    $section2 = PageSection::where('section_key','event_production')
+                ->limit(1)
+                ->get();
+
+
     $contact = Setting::where('group_name','social')->get();
 
     $work = SectionItem::where('section_key', 'how_we_work')
@@ -109,16 +119,17 @@ Route::get("/", function () {
     ->get();
 
 
+
+
     $why_led = SectionItem::where('section_key','why_led_events')
                 ->where('is_active',1)
                 ->orderBy('sort_order')
                 ->limit(3)
                 ->get();
 
-     $event = SectionItem::where('section_key','media')
+     $service = SectionItem::where('section_key','services')
             ->where('is_active',1)
             ->orderBy('sort_order')
-            ->limit(6)
             ->get();
 
     $project = SectionItem::where('section_key','project')
@@ -130,15 +141,10 @@ Route::get("/", function () {
     $blog = SectionItem::where('section_key','blog')
                 ->where('is_active',1)
                 ->orderBy('sort_order')
-                ->limit(8)
+                ->limit(4)
                 ->get();
 
-    $service = SectionItem::where('section_key','services')
-                ->where('is_active',1)
-                ->orderBy('sort_order')
-                ->get();
-
-    return view('welcome',compact(['section','contact','work','why_led','event','project','blog','service']));
+    return view('welcome',compact(['section','section2','contact','work','why_led','service','project','blog']));
 })->name('home');
 
 Route::get('/services', function (\Illuminate\Http\Request $request) {
@@ -158,18 +164,30 @@ Route::get('/services', function (\Illuminate\Http\Request $request) {
         ->orderBy('sort_order')
         ->get();
 
-    return view('frontend.pages.services', compact('service', 'type','section'));
+    $us = SectionItem::where('section_key','why_us')
+                        ->where('is_active',1)
+                        ->orderBy('sort_order')
+                        ->limit(5)
+                        ->get();
+
+    $case = SectionItem::where('section_key','case')
+            ->where('is_active',1)
+            ->orderBy('sort_order')
+            ->limit(4)
+            ->get();
+
+    return view('frontend.pages.services', compact('service', 'type','section','us','case'));
 
 })->name('services');
 
-Route::get('/service/{id}', function ($id){
-    $service = SectionItem::where('section_key', 'services')
-        ->where('is_active', 1)
-        ->where('id', $id)
-        ->firstOrFail();
+Route::get('/service/{id}',function ($id){
+    $service = SectionItem::where('section_key','services')
+                ->where('is_active',1)
+                ->FindOrFail($id);
 
-    return view('frontend.pages.service-detail', compact('service'));
-});
+
+    return view('frontend.pages.service-detail',compact('service'));
+})->name('service.show');
 
 Route::get('/contact', function () {
     return view('frontend.pages.contact');
@@ -224,21 +242,14 @@ Route::get('/projects', function (\Illuminate\Http\Request $request) {
 
     $type = $request->get('type');
 
-    $showAll = $request->get('all'); // 👈 add this
-
     $query = SectionItem::where('section_key', 'project')
-        ->where('is_active', 1)
-        ->when($type, function ($q) use ($type) {
-            $q->where('group_title', $type);
-        })
-        ->orderBy('sort_order');
+        ->where('is_active', 1);
 
-    // 👇 LIMIT logic
-    if ($showAll) {
-        $project = $query->get();
-    } else {
-        $project = $query->limit(5)->get(); // or 3 if you want
+    if ($type) {
+        $query->whereRaw('LOWER(REPLACE(group_title, " ", "-")) = ?', [$type]);
     }
+
+    $project = $query->orderBy('sort_order')->get();
 
     $section = PageSection::where('page','projects')
         ->where('is_active',1)
@@ -246,7 +257,6 @@ Route::get('/projects', function (\Illuminate\Http\Request $request) {
         ->first();
 
     return view('frontend.pages.projects', compact('project', 'type','section'));
-
 })->name('projects');
 
 Route::get('/project/{id}', function ($id){

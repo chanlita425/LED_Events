@@ -1,3 +1,7 @@
+@php
+    $video = $section2[0] ?? null;
+@endphp
+
 @extends('frontend.layouts.main')
 
 
@@ -5,8 +9,12 @@
     {{-- HERO SECTION --}}
     @foreach ($section as $key => $items)
         @foreach ($items as $item)
-            <div class="relative h-screen flex items-center justify-center bg-cover bg-center px-4"
-                style="background-image: url('{{ asset('storage/' . $item->media_url) }}');">
+            <div class="relative h-screen flex items-center justify-center bg-cover bg-center px-4">
+
+                {{-- VIDEO BACKGROUND --}}
+                <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover">
+                    <source src="{{ asset('storage/' . $item->media_url) }}" type="video/mp4">
+                </video>
 
                 <div class="absolute inset-0 bg-black/50"></div>
 
@@ -23,7 +31,7 @@
                     </p>
 
                     <div class="my-5 flex flex-col sm:flex-row gap-4 sm:gap-10">
-                        <a href="/media#event_video"
+                        <a href="#services"
                             class="border w-[183px] h-[44px] cursor-pointer flex items-center justify-center">
                             Explore More
                         </a>
@@ -128,9 +136,16 @@
             </h2>
 
             <p class="text-sm md:text-base mt-3">
+<<<<<<< HEAD
                 LED Event Services Cambodia for corporate events, exhibitions, and concerts.
                 We provide high-quality LED screens and visual solutions to enhance audience engagement and event impact in
                 Phnom Penh.</p>
+=======
+                LED Event Services Cambodia for corporate events, exhibitions, and concerts.<br />
+                We provide high-quality LED screens and visual solutions to enhance audience engagement and event impact in
+                Phnom Penh.
+            </p>
+>>>>>>> lysing
         </div>
 
 
@@ -258,19 +273,36 @@
                 src="https://www.youtube.com/embed/b4e4_R6W8jA?autoplay=1&mute=1&loop=1&playlist=b4e4_R6W8jA&controls=0&rel=0&playsinline=1"
                 class="absolute inset-0 w-full h-full object-cover" frameborder="0" allow="autoplay; " allowfullscreen>
             </iframe> --}}
-            <img src="{{ asset('images/project1.jpg') }}" alt="">
+            {{-- <img src="{{ asset('images/project1.jpg') }}" alt=""> --}}
 
-            {{-- DARK OVERLAY --}}
-            <div class="absolute inset-0 bg-black/50"></div>
+            @if ($video)
+                <div class="relative w-full h-[300px] sm:h-[400px] md:h-[500px] overflow-hidden">
 
             {{-- TEXT --}}
             <div class="absolute inset-0 flex items-center  text-white px-4 z-10">
 
-                <p class="text-lg sm:text-2xl md:text-3xl  px-40">
+                {{-- <p class="text-lg sm:text-2xl md:text-3xl  px-40">
                     The Most Reliable Event Production<br /> System in Cambodia
-                </p>
+                </p> --}}
+                    {{-- VIDEO --}}
+                    <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover">
+                        <source src="{{ asset('storage/' . $video->media_url) }}" type="video/mp4">
+                    </video>
 
-            </div>
+                    {{-- OVERLAY --}}
+                    <div class="absolute inset-0 bg-black/50"></div>
+
+                    {{-- TEXT --}}
+                    <div class="absolute inset-0 flex items-center text-white px-4 z-10">
+                        <p class="text-lg sm:text-2xl md:text-3xl px-10 md:px-40">
+                            The Most Reliable Event Production<br /> System in Cambodia
+                        </p>
+                    </div>
+
+                </div>
+            @endif
+
+
 
         </div>
 
@@ -282,7 +314,12 @@
                 @foreach ($blog as $item)
                     <!-- item -->
                     <a href="{{ route('blog.show', $item->id) }}" class="relative group overflow-hidden">
+<<<<<<< HEAD
                         <img src="{{ $item->image ? Storage::url($item->image) : asset('images/no-photo.png') }}"
+=======
+                        <img src="{{ $item->image ? Storage::url($item->image) : asset('images/no-image.jpg') }}"
+                        alt="{{ $item->title_en}}"
+>>>>>>> lysing
                             class="w-full h-52 sm:h-56 md:h-60 object-cover transition-transform duration-300 group-hover:scale-110">
 
                         <!-- overlay -->
@@ -301,13 +338,7 @@
                         </div>
                     </a>
                 @endforeach
-
-
-
             </div>
-
-
-
         </div>
 
     </div>
@@ -329,39 +360,48 @@
         }
 
         function renderCards() {
-            container.innerHTML = "";
+    container.innerHTML = "";
 
-            mediaItems.forEach(item => {
-                container.innerHTML += `
-            <div class="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 px-2">
-    <div class="bg-gradient-to-b from-[#383535] to-[#000000]
-        p-5 border border-[#272727] rounded-md
-        flex flex-col h-full"> <!-- IMPORTANT -->
+    mediaItems.forEach(item => {
+        container.innerHTML += `
+        <div class="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 px-2">
+            <div class="bg-gradient-to-b from-[#383535] to-[#000000]
+                p-5 border border-[#272727] rounded-md
+                flex flex-col h-full">
 
-        <img src="${item.image ? '/storage/' + item.image : '/images/no-image.jpg'}"
-             class="rounded-md w-full h-48 object-cover">
+                <img src="${item.image ? '/storage/' + item.image : '/images/no-image.jpg'}"
+                     alt="${item.title_en ?? ''}"
+                     class="rounded-md w-full h-48 object-cover">
 
-        <div class="p-3 flex flex-col flex-1 text-white"> <!-- IMPORTANT -->
+                <div class="p-3 flex flex-col flex-1 text-white">
 
-            <p class="font-bold">${item.title_en ?? ''}</p>
+                    <p class="font-bold">${item.title_en ?? ''}</p>
 
-            <p class="text-sm mt-2 line-clamp-3">
-                ${item.description_en ?? ''}
-            </p>
+                    <p class="text-sm mt-2 line-clamp-3">
+                        ${item.description_en ?? ''}
+                    </p>
 
+<<<<<<< HEAD
             <div class="mt-auto"> <!-- PUSH BUTTON DOWN -->
                 <a href="/service/${item.id}"
    class="mt-4 border px-6 py-2 text-sm cursor-pointer w-fit inline-block">
    Read More
 </a>
-            </div>
+=======
+                    <div class="mt-auto">
+                        <a href="/service/${item.id}"
+                           class="mt-4 border px-6 py-2 text-sm cursor-pointer w-fit inline-block">
+                           Read More
+                        </a>
+                    </div>
 
+                </div>
+>>>>>>> lysing
+            </div>
         </div>
-    </div>
-</div>
-            `;
-            });
-        }
+        `;
+    });
+}
 
         function updateCarousel() {
             const visible = getVisibleCards();

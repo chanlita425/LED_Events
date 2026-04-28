@@ -7,7 +7,7 @@
 
 @section('content')
     {{-- HERO SECTION --}}
-    <div class="relative min-h-screen flex items-center justify-center lg:my-30 lg:mx-10 bg-cover bg-center px-4 pt-28 p-4"
+    <div class="relative min-h-screen flex items-center justify-center bg-cover bg-center px-4 pt-28 p-4 lg:py-40 lg:px-10"
         style="background-image: url('{{ asset('images/hero-section.jpg') }}');">
 
         <!-- DARK OVERLAY -->

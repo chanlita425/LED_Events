@@ -62,15 +62,15 @@
 
                 <li><a href="{{ route('projects') }}" class="nav-link">All Projects</a></li>
 
-                <li><a href="{{ route('projects', ['type' => 'Concert Events']) }}" class="nav-link">Concert Events</a></li>
+                <li><a href="{{ route('projects', ['type' => 'concert-events']) }}" class="nav-link">Concert Events</a></li>
 
-                <li><a href="{{ route('projects', ['type' => 'Corporate Events']) }}" class="nav-link">Corporate Events</a>
+                <li><a href="{{ route('projects', ['type' => 'corporate-events']) }}" class="nav-link">Corporate Events</a>
                 </li>
 
-                <li><a href="{{ route('projects', ['type' => 'Festival Events']) }}" class="nav-link">Festival Events</a>
+                <li><a href="{{ route('projects', ['type' => 'festival-events']) }}" class="nav-link">Festival Events</a>
                 </li>
 
-                <li><a href="{{ route('projects', ['type' => 'Outdoor Events']) }}" class="nav-link">Outdoor Events</a></li>
+                <li><a href="{{ route('projects', ['type' => 'outdoor-events']) }}" class="nav-link">Outdoor Events</a></li>
 
             </ul>
         </nav>

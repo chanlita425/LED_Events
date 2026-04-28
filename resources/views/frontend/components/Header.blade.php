@@ -83,25 +83,33 @@
 
                 <div id="services-menu" class="submenu hidden mt-4 flex flex-col gap-3 text-lg pl-3">
 
-                    <a href="{{ route('services') }}">All Services</a>
 
-                    <a href="{{ route('services', ['type' => 'LED Screen']) }}">
-                        LED Screen Retail
+                    <a href="/services#led-screen-rental">
+                        LED Screen Rental
                     </a>
 
-                    <a href="{{ route('services', ['type' => 'Stage']) }}">
+                    <a href="/services#stage-rental">
                         Stage Rental
                     </a>
 
-                    <a href="{{ route('services', ['type' => 'Sound']) }}">
+                    {{-- <a href="{{ route('services', ['type' => 'Sound']) }}">
                         Sound System
                     </a>
 
                     <a href="{{ route('services', ['type' => 'Lighting']) }}">
                         Lighting Production
-                    </a>
+                    </a> --}}
 
                     <a href="{{ route('services', ['type' => 'Event']) }}">
+                    <a href="/services#sound-system">
+                        Sound System
+                    </a>
+
+                    <a href="/services#lighting-production">
+                        Lighting Production
+                    </a>
+
+                    <a href="/services#full-event-production">
                         Full Event Production
                     </a>
 
@@ -115,10 +123,19 @@
                 </button>
 
                 <div id="projects-menu" class="submenu hidden mt-4 flex flex-col gap-3 text-lg pl-3">
-                    <a href="/projects">All Projects</a>
-                    <a href="/projects#concert">Concert</a>
-                    <a href="/projects#corporate">Corporate</a>
-                    <a href="/projects#festival">Festival</a>
+                    <a href="{{ route('projects') }}" class="nav-link">All Projects</a>
+                    <a href="{{ route('projects', ['type' => 'concert-events']) }}" class="nav-link">
+                        Concert Events
+                    </a>
+                    <a href="{{ route('projects', ['type' => 'corporate-events']) }}" class="nav-link">
+                        Corporate Events
+                    </a>
+                    <a href="{{ route('projects', ['type' => 'festival-events']) }}" class="nav-link">
+                        Festival Events
+                    </a>
+                    <a href="{{ route('projects', ['type' => 'outdoor-events']) }}" class="nav-link">
+                        Outdoor Events
+                    </a>
                 </div>
             </div>
 
@@ -241,27 +258,27 @@
 
                                 <div class="max-w-6xl mx-auto px-6 py-6 flex items-start gap-10 text-white">
 
-                                    <a href="{{ route('services') }}">All Services</a>
 
-                    <a href="{{ route('services', ['type' => 'LED Screen']) }}">
-                        LED Screen Retail
-                    </a>
 
-                    <a href="{{ route('services', ['type' => 'Stage']) }}">
-                        Stage Rental
-                    </a>
+                                    <a href="/services#led-screen-rental">
+                                        LED Screen Rental
+                                    </a>
 
-                    <a href="{{ route('services', ['type' => 'Sound']) }}">
-                        Sound System
-                    </a>
+                                    <a href="/services#stage-rental">
+                                        Stage Rental
+                                    </a>
 
-                    <a href="{{ route('services', ['type' => 'Lighting']) }}">
-                        Lighting Production
-                    </a>
+                                    <a href="/services#sound-system">
+                                        Sound System
+                                    </a>
 
-                    <a href="{{ route('services', ['type' => 'Event']) }}">
-                        Full Event Production
-                    </a>
+                                    <a href="/services#lighting-production">
+                                        Lighting Production
+                                    </a>
+
+                                    <a href="/services#full-event-production">
+                                        Full Event Production
+                                    </a>
 
                                 </div>
                             </div>
@@ -271,18 +288,18 @@
                                 class="absolute left-0 top-full w-full bg-black/95 border-t border-gray-800 opacity-70 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 ">
                                 <div class="max-w-6xl mx-auto px-6 py-6 flex items-start gap-10 text-white">
                                     <a href="{{ route('projects') }}" class="nav-link">All Projects</a>
-                                    <a href="{{ route('projects', ['type' => 'Concert Events']) }}" class="nav-link">
+                                    <a href="{{ route('projects', ['type' => 'concert-events']) }}" class="nav-link">
                                         Concert Events
                                     </a>
-                                    <a href="{{ route('projects', ['type' => 'Corporate Events']) }}"
+                                    <a href="{{ route('projects', ['type' => 'corporate-events']) }}"
                                         class="nav-link">
                                         Corporate Events
                                     </a>
-                                    <a href="{{ route('projects', ['type' => 'Festival Events']) }}"
+                                    <a href="{{ route('projects', ['type' => 'festival-events']) }}"
                                         class="nav-link">
                                         Festival Events
                                     </a>
-                                    <a href="{{ route('projects', ['type' => 'Outdoor Events']) }}" class="nav-link">
+                                    <a href="{{ route('projects', ['type' => 'outdoor-events']) }}" class="nav-link">
                                         Outdoor Events
                                     </a>
                                 </div>
@@ -351,36 +368,36 @@
                     <div class="flex items-center gap-4 text-black">
                         @foreach ($contact as $item)
                             @if ($item->key_name === 'youtube')
-                                <a href="{{ $item->value_en }}"
-                                    class="w-7 h-7 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
-                                    <i class="fa-brands fa-square-youtube text-sm"></i>
+                                <a href="{{ $item->value_en }} "
+                                    class=" w-7 h-7 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
+                                    <i class="fa-brands fa-square-youtube text-sm "></i>
                                 </a>
                             @endif
 
                             @if ($item->key_name === 'facebook')
                                 <a href="{{ $item->value_en }}"
-                                    class="w-7 h-7 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
+                                    class=" w-7 h-7 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
                                     <i class="fa-brands fa-facebook-f text-sm"></i>
                                 </a>
                             @endif
 
                             @if ($item->key_name === 'tiktok')
                                 <a href="{{ $item->value_en }}"
-                                    class="w-7 h-7 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
+                                    class=" w-7 h-7 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
                                     <i class="fa-brands fa-tiktok text-sm"></i>
                                 </a>
                             @endif
 
                             @if ($item->key_name === 'instagram')
                                 <a href="{{ $item->value_en }}"
-                                    class="w-7 h-7 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
+                                    class=" w-7 h-7 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
                                     <i class="fa-brands fa-instagram text-sm"></i>
                                 </a>
                             @endif
 
                             @if ($item->key_name === 'telegram')
                                 <a href="{{ $item->value_en }}"
-                                    class="w-7 h-7 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
+                                    class="animate-bounce w-7 h-7 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
                                     <i class="fa-brands fa-telegram text-sm"></i>
                                 </a>
                             @endif

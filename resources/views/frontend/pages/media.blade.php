@@ -72,7 +72,7 @@
             @foreach ($gallery as $item)
                 <a href="{{ url('/media/' . $item->id) }}" class="relative group overflow-hidden block">
 
-                    <img src="{{ $item->image ? Storage::url($item->image) : asset('images/no-image.jpg') }}"
+                    <img src="{{ $item->image ? Storage::url($item->image) : asset('images/no-image.jpg') }}" alt="{{ $item->title_en }}"
                         class="w-full h-52 sm:h-56 md:h-60 object-cover transition-transform duration-300 group-hover:scale-110">
 
                     <!-- overlay -->
@@ -108,8 +108,13 @@
             @foreach ($behind as $item)
                 <a href="{{ url('/media/' . $item->id) }}" class="relative group overflow-hidden block">
 
+<<<<<<< HEAD
                     <img src="{{ $item->image ? Storage::url($item->image) : asset('images/no-image.jpg') }}"
                         class="w-full h-60 object-cover transition-transform duration-300 group-hover:scale-110">
+=======
+            <img src="{{ $item->image ? Storage::url($item->image) : asset('images/no-image.jpg') }}" alt="{{ $item->title_en}}"
+                class="w-full h-60 object-cover transition-transform duration-300 group-hover:scale-110">
+>>>>>>> lysing
 
                     <!-- overlay -->
                     <div
@@ -145,10 +150,17 @@
         return 3;
     }
 
+<<<<<<< HEAD
     function convertToEmbed(url) {
         if (!url) return "";
 
         // YouTube watch or short link → embed
+=======
+    // ✅ FIX YouTube / video embed
+    function convertToEmbed(url) {
+        if (!url) return "";
+
+>>>>>>> lysing
         const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]+)/);
 
         if (match) {
@@ -167,22 +179,20 @@
 
             // ✅ VIDEO
             if (item.link) {
-                const embedUrl = convertToEmbed(item.link);
+                const embed = convertToEmbed(item.link);
 
                 mediaHtml = `
                     <iframe
-                        class="w-full h-48 rounded-md"
-                        src="${embedUrl}?rel=0&modestbranding=1"
-                        frameborder="0"
-                        allow="autoplay; encrypted-media; picture-in-picture"
-                        allowfullscreen>
+                        class="rounded-md w-full h-48"
+                        src="${embed}"
+                        frameborder="0" allow="autoplay; " allowfullscreen>
                     </iframe>
                 `;
             }
-            // ✅ IMAGE fallback
+            // ✅ IMAGE
             else {
                 mediaHtml = `
-                    <img src="${item.image ? '/storage/' + item.image : '/images/no-image.jpg'}"
+                    <img src="${item.image ? '/storage/' + item.image : '/images/no-image.jpg'}" alt=`${$item->title_en}`
                          class="rounded-md w-full h-48 object-cover">
                 `;
             }
