@@ -135,7 +135,7 @@ class PageSectionController extends Controller
             'youtube' => 'YouTube',
         ];
 
-        return view('backend.page.Cms.page-sections.update', compact(
+        return view('backend.page.cms.page-sections.edit', compact(
             'section',
             'pages',
             'mediaTypes'
