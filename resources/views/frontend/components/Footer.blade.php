@@ -25,9 +25,7 @@
                 </div>
 
                 <p class="mt-5 text-center lg:text-left">
-                    LED EVENTS aims to build a high-performance, SEO-driven website to generate qualified
-                    leads, build strong trust, support long-term content growth, position as a premium event
-                    production company, and support expansion to Southeast Asia.
+                    LED Events is a full-service event production company providing LED screens, staging, sound, and lighting solutions. Since 2012, we have been delivering reliable and high-quality event experiences for projects of all sizes.
                 </p>
             </div>
 

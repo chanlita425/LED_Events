@@ -41,6 +41,7 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
     <style>
         html {
             scroll-behavior: smooth;
@@ -74,6 +75,7 @@
             class="w-12 h-auto invert brightness-0 rotate-180">
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     {{-- JS --}}
     <script>
         const scrollBtn = document.getElementById("scrollTopBtn");
