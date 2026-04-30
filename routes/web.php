@@ -210,6 +210,21 @@ Route::get('/why-us', function () {
     return view('frontend.pages.whyUs',compact(['us','section']));
 })->name('why-us');
 
+
+// STATIC PAGE FIRST (important)
+Route::get('/blog/event-guide', function () {
+    return view('frontend.pages.event-guide');
+})->name('blog.event-guides');
+
+Route::get('/blog/led-knowledge', function () {
+    return view('frontend.pages.led-knowledge');
+})->name('blog.led-knowledge');
+
+Route::get('/blog/production-tip', function () {
+    return view('frontend.pages.production-tip');
+})->name('blog.production-tip');
+
+// BLOG LIST
 Route::get('/blog', function (\Illuminate\Http\Request $request) {
 
     $type = $request->get('type');
@@ -223,19 +238,21 @@ Route::get('/blog', function (\Illuminate\Http\Request $request) {
         ->get();
 
     $section = PageSection::where('page','blog')
-    ->where('is_active',1)
-    ->orderBy('sort_order')
-    ->first();
+        ->where('is_active',1)
+        ->first();
 
-    return view('frontend.pages.blog', compact('blog', 'type','section'));
+    return view('frontend.pages.blog', compact('blog','type','section'));
 })->name('blog');
 
-Route::get('/blog/{id}',function ($id){
-    $article = SectionItem::where('section_key','blog')
-                ->where('is_active',1)
-                ->FindOrFail($id);
 
-    return view('frontend.pages.blog-detail',compact('article'));
+// DYNAMIC DETAIL PAGE LAST
+Route::get('/blog/{id}', function ($id){
+
+    $article = SectionItem::where('section_key','blog')
+        ->where('is_active',1)
+        ->findOrFail($id);
+
+    return view('frontend.pages.blog-detail', compact('article'));
 })->name('blog.show');
 
 Route::get('/projects', function (\Illuminate\Http\Request $request) {
