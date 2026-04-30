@@ -61,8 +61,8 @@
                     installation, and live operation.
                 </p>
 
-                <p>👉 Learn more about our <a href="/services">Event Services</a></p>
-                <p> 👉 Explore our <a href="/services">Projects</a></p>
+                <p>👉 Learn more about our <a href="/services" class="text-red-500 underline">Event Services</a></p>
+                <p> 👉 Explore our <a href="/services" class="text-red-500 underline">Projects</a></p>
             </div>
 
             {{-- SECTION 3 --}}
@@ -87,7 +87,7 @@
                     and technical issues.
                 </p>
 
-                👉 <a href="/contact">Contact us today</a> to plan your next event with confidence.
+                👉 <a href="/contact" class="text-red-500 underline">Contact us today</a> to plan your next event with confidence.
             </div>
 
         </div>

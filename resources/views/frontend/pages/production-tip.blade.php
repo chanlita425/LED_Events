@@ -70,10 +70,11 @@
                 An experienced production team ensures better coordination, faster problem-solving, and high-quality execution.
             </p>
 
-            <a href="/why-us"
+            {{-- <a href="/why-us"
                 class="mt-4 inline-block text-[#ED1C24] font-medium hover:underline text-sm sm:text-base">
                 👉 Learn more about our Why Choose Us
-            </a>
+            </a> --}}
+            <p>👉 Learn more about our <a href="/why-us" class="text-red-500 underline">Why Choose Us</a></p>
         </div>
 
         <!-- TIP 5 -->
@@ -89,10 +90,12 @@
         <!-- CTA -->
         <div class="mt-12 border-t border-white/10 pt-8">
 
-            <a href="/contact"
+            {{-- <a href="/contact"
                 class="inline-block bg-[#ED1C24] px-6 py-3 text-sm sm:text-base font-medium hover:opacity-90 transition">
                 👉 Get in touch with our team
-            </a>
+            </a> --}}
+            <p>👉 <a href="/contact" class="text-red-500 underline">Get in touch with our team</a> to support your next event.
+</p>
 
         </div>
 
