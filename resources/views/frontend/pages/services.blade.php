@@ -47,8 +47,7 @@
                     <div>
                         <h2 class="text-2xl font-bold">LED Screen Rental</h2>
                         <p class="mt-3 text-sm">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. LED screen rental service for events,
-                            concerts, and corporate shows.
+                            Provision of indoor and outdoor LED display screens, including installation and live technical operation.
                         </p>
                         <a href="/contact" class="mt-4 inline-block border px-6 py-2">
                             Contact Us
@@ -64,8 +63,7 @@
                     <div>
                         <h2 class="text-2xl font-bold">Stage Rental</h2>
                         <p class="mt-3 text-sm">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Professional stage setup for all event
-                            types.
+                            Supply of modular staging systems, truss structures, and complete setup for various event types.
                         </p>
                         <a href="/contact" class="mt-4 inline-block border px-6 py-2">
                             Contact Us
@@ -87,8 +85,7 @@
                     <div>
                         <h2 class="text-2xl font-bold">Sound System</h2>
                         <p class="mt-3 text-sm">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. High-quality sound systems for indoor
-                            and outdoor events.
+                            High-quality professional audio equipment designed for concerts and large-scale events.
                         </p>
                         <a href="/contact" class="mt-4 inline-block border px-6 py-2">
                             Contact Us
@@ -104,8 +101,8 @@
                     <div>
                         <h2 class="text-2xl font-bold">Lighting Production</h2>
                         <p class="mt-3 text-sm">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Creative lighting solutions for events
-                            and shows.
+                            Creative stage lighting design, programming, and execution to enhance visual experience.
+
                         </p>
                         <a href="/contact" class="mt-4 inline-block border px-6 py-2">
                             Contact Us
@@ -127,8 +124,7 @@
                     <div>
                         <h2 class="text-2xl font-bold">Full Event Production</h2>
                         <p class="mt-3 text-sm">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Complete event production from planning
-                            to execution.
+                            End-to-end event solutions covering planning, coordination, and on-site management.
                         </p>
                         <a href="/contact" class="mt-4 inline-block border px-6 py-2">
                             Contact Us
@@ -313,7 +309,7 @@
                             <a href="{{ route('projects', [
                                 'type' => Str::slug($item->title_en),
                             ]) }}" class="border border-white py-3 flex items-center justify-center">
-                                Find More
+                                Find Out More
                             </a>
                         </div>
                     </div>

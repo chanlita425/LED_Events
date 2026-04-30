@@ -101,17 +101,17 @@
                     </a> --}}
 
                     <a href="{{ route('services', ['type' => 'Event']) }}">
-                    <a href="/services#sound-system">
-                        Sound System
-                    </a>
+                        <a href="/services#sound-system">
+                            Sound System
+                        </a>
 
-                    <a href="/services#lighting-production">
-                        Lighting Production
-                    </a>
+                        <a href="/services#lighting-production">
+                            Lighting Production
+                        </a>
 
-                    <a href="/services#full-event-production">
-                        Full Event Production
-                    </a>
+                        <a href="/services#full-event-production">
+                            Full Event Production
+                        </a>
 
                 </div>
             </div>
@@ -399,6 +399,18 @@
                                 <a href="{{ $item->value_en }}"
                                     class="animate-bounce w-7 h-7 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
                                     <i class="fa-brands fa-telegram text-sm"></i>
+                                </a>
+                            @endif
+                            @if ($item->key_name === 'linkdin')
+                                <a href="{{ $item->value_en }}"
+                                    class="w-7 h-7 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
+                                    <i class="fa-brands fa-linkedin-in"></i>
+                                </a>
+                            @endif
+                            @if ($item->key_name === 'whatsapp')
+                                <a href="{{ $item->value_en }}"
+                                    class="w-7 h-7 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
+                                    <i class="fa-brands fa-whatsapp"></i>
                                 </a>
                             @endif
                         @endforeach

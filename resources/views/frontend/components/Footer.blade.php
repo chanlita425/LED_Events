@@ -25,7 +25,9 @@
                 </div>
 
                 <p class="mt-5 text-center lg:text-left">
-                    LED Events is a full-service event production company providing LED screens, staging, sound, and lighting solutions. Since 2012, we have been delivering reliable and high-quality event experiences for projects of all sizes.
+                    LED Events is a full-service event production company providing LED screens, staging, sound, and
+                    lighting solutions. Since 2012, we have been delivering reliable and high-quality event experiences
+                    for projects of all sizes.
                 </p>
             </div>
 
@@ -131,10 +133,30 @@
                                     <i class="fa-brands fa-telegram text-sm"></i>
                                 </a>
                             @endif
+                            @if ($item->key_name === 'linkdin')
+                                <a href="{{ $item->value_en }}"
+                                    class="w-7 h-7 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
+                                    <i class="fa-brands fa-linkedin-in"></i>
+                                </a>
+                            @endif
+                            @if ($item->key_name === 'whatsapp')
+                                <a href="{{ $item->value_en }}"
+                                    class="w-7 h-7 flex items-center justify-center bg-white rounded-full hover:bg-gray-200 transition">
+                                    <i class="fa-brands fa-whatsapp"></i>
+                                </a>
+                            @endif
                         @endforeach
 
                     </div>
                 </div>
+
+                <div style="width: 100%; height: 200px;">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3908.757068260551!2d104.85095277590435!3d11.569265188631892!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3109510061cb408b%3A0x415db76a8186c438!2sLED%20Media!5e0!3m2!1sen!2skh!4v1777529761700!5m2!1sen!2skh"
+                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+                    </iframe>
+                </div>
+
 
             </div>
         </div>

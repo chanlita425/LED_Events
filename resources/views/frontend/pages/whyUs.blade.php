@@ -43,12 +43,12 @@
         <div class="flex flex-col items-center gap-5 md:hidden my-10">
 
             @foreach ($us as $item)
-                <div class="w-[239px] h-[239px] bg-black flex flex-col justify-end p-5 gap-3 relative">
+                <div class="w-[239px]  bg-black flex flex-col justify-end p-5 gap-3 relative">
                     <img src="{{ Storage::url($item->icon) }}"
                         class="absolute top-5 right-5 w-[38.78px] h-auto filter brightness-0 invert" />
                     <p></p>
                     <p class="text-[20px]">{{ $item->title_en }}</p>
-                    <p class="text-[12px] line-clamp-4">{{ $item->description_en }}</p>
+                    <p class="text-[12px] ">{{ $item->description_en }}</p>
                 </div>
             @endforeach
 
