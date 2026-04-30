@@ -29,7 +29,7 @@
 
         <!-- INTRO -->
         <p class="mt-5 sm:mt-6 text-gray-300 leading-relaxed text-sm sm:text-base">
-            In today’s event industry, LED screens have become a must-have solution for delivering impactful visuals.
+            In today’s event industry, <span class="font-bold">LED screens</span> have become a must-have solution for delivering impactful visuals.
             From concerts to corporate events in Phnom Penh, LED technology enhances audience engagement and overall experience.
         </p>
 
@@ -41,7 +41,7 @@
 
             <p class="mt-3 text-gray-300 leading-relaxed text-sm sm:text-base">
                 Unlike projectors, LED screens provide clear and bright visuals even in outdoor environments,
-                making them ideal for festival and outdoor events.
+                making them ideal for <span class="font-bold">festival and outdoor events</span>.
             </p>
         </div>
 
