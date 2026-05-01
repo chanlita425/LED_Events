@@ -13,16 +13,36 @@
 
     </div>
 
-    <!-- CONTENT -->
     <div class="max-w-4xl mx-auto py-20 text-white px-5">
 
         @foreach (explode("\n", $service->description_en) as $line)
             @if (trim($line))
-                <p class="text-gray-300 text-lg leading-relaxed mb-4">
-                    {{ $line }}
+                <p class="prose text-gray-300 text-lg leading-relaxed mb-4">
+                    {!! $line !!}
                 </p>
             @endif
         @endforeach
+        @if (!empty($service->images))
+            <div class="max-w-6xl mx-auto px-5 pb-20">
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[200px]">
+
+                    @foreach ($service->images as $index => $img)
+                        <div
+                            class="
+                        overflow-hidden rounded-xl
+                        {{ $index == 0 ? 'md:col-span-3 md:row-span-2' : '' }}
+                        {{ $index == 1 ? 'md:col-span-2' : '' }}
+                    ">
+                            <img src="{{ Storage::url($img) }}"
+                                class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                        </div>
+                    @endforeach
+
+                </div>
+
+            </div>
+        @endif
 
     </div>
 @endsection
