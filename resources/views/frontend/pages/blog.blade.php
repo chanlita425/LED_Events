@@ -11,7 +11,7 @@
 
         <div class="absolute inset-0 bg-black/50"></div>
 
-        <div class="relative z-10 text-white text-center">
+        <div class="relative z-10 text-white flex flex-col items-center text-center">
             <h1 class="uppercase leading-tight text-4xl sm:text-6xl md:text-7xl lg:text-[100px] font-bold">
                 {{ $activeType ?? $section->title_en }}
             </h1>
