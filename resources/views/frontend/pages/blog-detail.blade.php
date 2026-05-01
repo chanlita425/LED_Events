@@ -18,9 +18,9 @@
 
         @foreach (explode("\n", $article->description_en) as $line)
             @if (trim($line))
-                <p class="text-gray-300 text-lg leading-relaxed mb-4">
-                    {{ $line }}
-                </p>
+                <div class="prose max-w-none text-gray-300">
+    {!! $article->description_en !!}
+</div>
             @endif
         @endforeach
 
