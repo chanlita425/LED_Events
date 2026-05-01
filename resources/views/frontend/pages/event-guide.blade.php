@@ -62,7 +62,7 @@
                 </p>
 
                 <p>👉 Learn more about our <a href="/services" class="text-red-500 underline">Event Services</a></p>
-                <p> 👉 Explore our <a href="/services" class="text-red-500 underline">Projects</a></p>
+                <p> 👉 Explore our <a href="/projects" class="text-red-500 underline">Projects</a></p>
             </div>
 
             {{-- SECTION 3 --}}

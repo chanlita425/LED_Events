@@ -102,7 +102,7 @@
                 class="text-[#ED1C24] font-medium hover:underline text-sm sm:text-base">
                 👉 Check out our Recent Projects
             </a> --}}
-                <p>👉 Check out our <a href="" class="text-red-500 underline">Recent Projects</a></p>
+                <p>👉 Check out our <a href="/projects" class="text-red-500 underline">Recent Projects</a></p>
 
                 {{-- <a href="/contact" class="text-[#ED1C24] font-medium hover:underline text-sm sm:text-base">
                     👉 Request a quotation for your next event
