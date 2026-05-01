@@ -107,6 +107,8 @@ class SectionItemController extends Controller
             'is_active'      => 'boolean',
             'type'           => 'nullable|string|max:255',
             'meta'           => 'nullable',
+            'images'         => 'nullable|array|max:40',
+            'images.*'       => 'file|mimes:jpg,jpeg,png,gif,webp|max:4096',
         ]);
 
         // MAIN IMAGE
@@ -188,6 +190,10 @@ class SectionItemController extends Controller
             'is_active'      => 'boolean',
             'type'           => 'nullable|string|max:255',
             'meta'           => 'nullable',
+            'images'         => 'nullable|array',
+            'images.*'       => 'file|mimes:jpg,jpeg,png,gif,webp|max:4096',
+            'remove_images'  => 'nullable|array',
+            'remove_images.*'=> 'integer',
         ]);
 
         // MAIN IMAGE UPDATE
@@ -206,8 +212,21 @@ class SectionItemController extends Controller
             $data['icon'] = $request->file('icon')->store('section-items/icons', 'public');
         }
 
-        // ADD NEW GALLERY IMAGES (APPEND)
-        $images = $item->images ?? [];
+        // GALLERY — remove selected, append new
+        $images   = $item->images ?? [];
+        $toRemove = array_map('intval', $request->input('remove_images', []));
+
+        if ($toRemove) {
+            foreach ($toRemove as $index) {
+                if (isset($images[$index])) {
+                    Storage::disk('public')->delete($images[$index]);
+                }
+            }
+            $images = array_values(array_filter($images,
+                fn($k) => !in_array($k, $toRemove, true),
+                ARRAY_FILTER_USE_KEY
+            ));
+        }
 
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $file) {

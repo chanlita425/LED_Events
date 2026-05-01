@@ -114,6 +114,33 @@
                 </div>
             </div>
 
+            {{-- GALLERY IMAGES --}}
+            <div>
+                <div class="flex items-center justify-between mb-2">
+                    <label class="text-xs text-gray-100">Gallery Images</label>
+                    <span id="gallery-count-create" class="text-xs text-gray-500">0 / 30 images</span>
+                </div>
+
+                <div id="gallery-drop-create"
+                     class="border-2 border-dashed border-gray-700 rounded-xl p-6 text-center cursor-pointer hover:border-orange-500 transition"
+                     onclick="document.getElementById('gallery-input-create').click()">
+                    <svg class="mx-auto mb-2 w-7 h-7 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/>
+                    </svg>
+                    <p class="text-gray-400 text-sm">Click or drag & drop images here</p>
+                    <p class="text-gray-600 text-xs mt-1">JPG, PNG, GIF, WEBP — max 40 images</p>
+                    <input type="file"
+                           id="gallery-input-create"
+                           name="images[]"
+                           multiple
+                           accept="image/jpeg,image/png,image/gif,image/webp"
+                           class="hidden">
+                </div>
+
+                <div id="gallery-preview-create" class="mt-3 flex gap-2 overflow-x-scroll pb-2" style="max-width:1136px"></div>
+                <p id="gallery-error-create" class="text-red-400 text-xs mt-1 hidden">Maximum 40 images allowed.</p>
+            </div>
+
             <div class="grid grid-cols-2 gap-4 mt-4">
                 {{-- LINK --}}
                 <input type="text" name="link" placeholder="Link"
@@ -183,6 +210,97 @@
         }).catch(error => {
             console.error(error);
         });
+        // ── Gallery images (create) ──────────────────────────────
+        const MAX_IMAGES = 40;
+        const galleryInput  = document.getElementById('gallery-input-create');
+        const galleryDrop   = document.getElementById('gallery-drop-create');
+        const galleryPreview = document.getElementById('gallery-preview-create');
+        const galleryCount  = document.getElementById('gallery-count-create');
+        const galleryError  = document.getElementById('gallery-error-create');
+        let selectedFiles   = [];
+
+        function renderGallery() {
+            galleryPreview.innerHTML = '';
+            galleryCount.textContent = `${selectedFiles.length} / ${MAX_IMAGES} images`;
+            galleryCount.className   = selectedFiles.length >= MAX_IMAGES
+                ? 'text-xs text-orange-400' : 'text-xs text-gray-500';
+
+            // newest first
+            [...selectedFiles].reverse().forEach((file, ri) => {
+                const i = selectedFiles.length - 1 - ri;
+                const reader = new FileReader();
+                reader.onload = e => {
+                    const div = document.createElement('div');
+                    div.className = 'relative group flex-shrink-0 w-24';
+                    div.innerHTML = `
+                        <img src="${e.target.result}"
+                             class="w-24 h-20 object-cover rounded-xl border border-gray-700">
+                        <button type="button"
+                                onclick="removeGalleryFile(${i})"
+                                class="absolute top-1 right-1 w-5 h-5 bg-red-500/80 hover:bg-red-500 rounded flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                            <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        </button>`;
+                    galleryPreview.appendChild(div);
+                };
+                reader.readAsDataURL(file);
+            });
+
+            // Sync to input
+            const dt = new DataTransfer();
+            selectedFiles.forEach(f => dt.items.add(f));
+            galleryInput.files = dt.files;
+        }
+
+        function removeGalleryFile(index) {
+            selectedFiles.splice(index, 1);
+            renderGallery();
+        }
+
+        function addFiles(newFiles) {
+            const combined = [...selectedFiles, ...newFiles];
+            if (combined.length > MAX_IMAGES) {
+                galleryError.classList.remove('hidden');
+                selectedFiles = combined.slice(0, MAX_IMAGES);
+            } else {
+                galleryError.classList.add('hidden');
+                selectedFiles = combined;
+            }
+            renderGallery();
+        }
+
+        galleryInput.addEventListener('change', () => addFiles([...galleryInput.files]));
+
+        galleryDrop.addEventListener('dragover', e => { e.preventDefault(); galleryDrop.classList.add('border-orange-500'); });
+        galleryDrop.addEventListener('dragleave', () => galleryDrop.classList.remove('border-orange-500'));
+        galleryDrop.addEventListener('drop', e => {
+            e.preventDefault();
+            galleryDrop.classList.remove('border-orange-500');
+            addFiles([...e.dataTransfer.files].filter(f => f.type.startsWith('image/')));
+        });
+        // Mouse-drag scroll
+        dragScroll(galleryPreview);
+
+        function dragScroll(el) {
+            let isDown = false, startX, scrollLeft;
+            el.addEventListener('mousedown', e => {
+                isDown = true;
+                el.style.cursor = 'grabbing';
+                startX = e.pageX - el.offsetLeft;
+                scrollLeft = el.scrollLeft;
+            });
+            el.addEventListener('mouseleave', () => { isDown = false; el.style.cursor = 'grab'; });
+            el.addEventListener('mouseup',    () => { isDown = false; el.style.cursor = 'grab'; });
+            el.addEventListener('mousemove',  e => {
+                if (!isDown) return;
+                e.preventDefault();
+                el.scrollLeft = scrollLeft - (e.pageX - el.offsetLeft - startX);
+            });
+            el.style.cursor = 'grab';
+        }
+        // ────────────────────────────────────────────────────────
+
         // Section select → copy to input
         document.getElementById('sectionSelect').addEventListener('change', function() {
             const input = document.getElementById('sectionInput');
