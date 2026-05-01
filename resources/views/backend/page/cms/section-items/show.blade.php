@@ -104,11 +104,35 @@
                 @if($item->icon)
                 <div class="bg-gray-800/30 border border-gray-800/60 rounded-lg p-3">
                     <p class="text-gray-400 text-xs">Icon</p>
-                    <p class="text-white text-sm break-all">{{ $item->icon }}</p>
+                    <img src="{{ asset('storage/' . $item->icon) }}"
+                         class="h-10 mt-1 rounded border border-gray-800/60">
                 </div>
                 @endif
 
             </div>
+
+            {{-- GALLERY IMAGES --}}
+            @if($item->images && count($item->images))
+            <div class="bg-gray-800/30 border border-gray-800/60 rounded-lg p-3">
+
+                <div class="flex items-center justify-between mb-2">
+                    <p class="text-gray-400 text-xs">Gallery Images</p>
+                    <span class="text-xs text-gray-500">{{ count($item->images) }} images</span>
+                </div>
+
+                <div id="gallery-show-scroll"
+                     class="flex gap-2 overflow-x-scroll pb-2"
+                     style="max-width:1136px; cursor:grab">
+                    @foreach(array_reverse($item->images) as $img)
+                        <div class="flex-shrink-0 w-24">
+                            <img src="{{ asset('storage/' . $img) }}"
+                                 class="w-24 h-20 object-cover rounded-xl border border-gray-700 hover:border-orange-500/60 transition">
+                        </div>
+                    @endforeach
+                </div>
+
+            </div>
+            @endif
 
             {{-- LINK --}}
             @if($item->link)
@@ -158,3 +182,25 @@
 </div>
 
 @endsection
+
+@push('scripts')
+<script>
+    const el = document.getElementById('gallery-show-scroll');
+    if (el) {
+        let isDown = false, startX, scrollLeft;
+        el.addEventListener('mousedown', e => {
+            isDown = true;
+            el.style.cursor = 'grabbing';
+            startX    = e.pageX - el.offsetLeft;
+            scrollLeft = el.scrollLeft;
+        });
+        el.addEventListener('mouseleave', () => { isDown = false; el.style.cursor = 'grab'; });
+        el.addEventListener('mouseup',    () => { isDown = false; el.style.cursor = 'grab'; });
+        el.addEventListener('mousemove',  e => {
+            if (!isDown) return;
+            e.preventDefault();
+            el.scrollLeft = scrollLeft - (e.pageX - el.offsetLeft - startX);
+        });
+    }
+</script>
+@endpush
