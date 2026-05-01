@@ -19,6 +19,10 @@
             <p class="mt-4 max-w-2xl mx-auto text-center leading-relaxed">
                 {{ $section->subtitle_en }}
             </p>
+
+            <a href="/contact" class="mt-6 w-[183px] h-[44px] flex items-center justify-center bg-black">
+                Contact Us
+            </a>
         </div>
     </div>
 
