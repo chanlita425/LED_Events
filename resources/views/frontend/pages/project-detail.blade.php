@@ -3,7 +3,7 @@
 @section('content')
 
     <!-- HERO -->
-    <div class="relative h-auto w-full flex items-center justify-center bg-cover bg-center bg-no-repeat"
+    <div class="relative h-screen w-full flex items-center justify-center bg-cover bg-center bg-no-repeat"
         style="background-image: url('{{ Storage::url($project->image) }}');">
 
         <!-- Dark overlay -->

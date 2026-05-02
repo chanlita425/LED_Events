@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- HERO -->
-    <div class="relative h-auto w-full flex items-center justify-center bg-cover bg-center"
+    <div class="relative h-screen w-full flex items-center justify-center bg-cover bg-center"
         style="background-image: url('{{ Storage::url($article->image) }}');">
 
         <div class="absolute inset-0 bg-black/60"></div>
