@@ -96,7 +96,7 @@ class SectionItemController extends Controller
             'description_en' => 'nullable|string',
             'description_km' => 'nullable|string',
 
-            'image'          => 'nullable|file|mimes:jpg,jpeg,png,gif,webp|max:4096',
+            'image'          => 'nullable|file|mimes:jpg,jpeg,png,gif,webp',
             'icon'           => 'nullable|file|mimes:jpg,jpeg,png,gif,webp,svg|max:2048',
 
             'link'           => 'nullable|string|max:255',
@@ -108,7 +108,7 @@ class SectionItemController extends Controller
             'type'           => 'nullable|string|max:255',
             'meta'           => 'nullable',
             'images'         => 'nullable|array|max:40',
-            'images.*'       => 'file|mimes:jpg,jpeg,png,gif,webp|max:4096',
+            'images.*'       => 'file|mimes:jpg,jpeg,png,gif,webp',
         ]);
 
         // MAIN IMAGE
@@ -179,7 +179,7 @@ class SectionItemController extends Controller
             'description_en' => 'nullable|string',
             'description_km' => 'nullable|string',
 
-            'image'          => 'nullable|file|mimes:jpg,jpeg,png,gif,webp|max:4096',
+            'image'          => 'nullable|file|mimes:jpg,jpeg,png,gif,webp',
             'icon'           => 'nullable|file|mimes:jpg,jpeg,png,gif,webp,svg|max:2048',
 
             'link'           => 'nullable|string|max:255',
@@ -191,7 +191,7 @@ class SectionItemController extends Controller
             'type'           => 'nullable|string|max:255',
             'meta'           => 'nullable',
             'images'         => 'nullable|array',
-            'images.*'       => 'file|mimes:jpg,jpeg,png,gif,webp|max:4096',
+            'images.*'       => 'file|mimes:jpg,jpeg,png,gif,webp',
             'remove_images'  => 'nullable|array',
             'remove_images.*'=> 'integer',
         ]);
