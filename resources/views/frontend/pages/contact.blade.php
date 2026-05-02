@@ -81,13 +81,22 @@
                     #159A, Street 2011, Dei Thmey Village, Khmuonh Commune, Sen Sok District, Phnom Penh.
                 </p>
 
-                <div class="text-sm sm:text-base text-gray-200">
-                    <p>Phone: 015 999 235</p>
-                    <p>Email: Info@ledevents.asia</p>
+                <div class="text-sm sm:text-base text-gray-200 space-y-2">
+
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-phone"></i>
+                        <span>015 999 235</span>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <i class="fa-regular fa-envelope"></i>
+                        <span>Info@ledevents.asia</span>
+                    </div>
+
                 </div>
 
                 {{-- SOCIAL ICONS --}}
-                <div class="flex justify-center  lg:justify-start">
+                {{-- <div class="flex justify-center  lg:justify-start">
 
                     <div class="flex items-center gap-3 sm:gap-4 text-black">
 
@@ -129,10 +138,11 @@
                         @endforeach
 
                     </div>
-                </div>
+                </div> --}}
 
                 <div style="width: 100%; height: 400px;">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3908.757068260551!2d104.85095277590435!3d11.569265188631892!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3109510061cb408b%3A0x415db76a8186c438!2sLED%20Media!5e0!3m2!1sen!2skh!4v1777529761700!5m2!1sen!2skh"
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3908.757068260551!2d104.85095277590435!3d11.569265188631892!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3109510061cb408b%3A0x415db76a8186c438!2sLED%20Media!5e0!3m2!1sen!2skh!4v1777529761700!5m2!1sen!2skh"
                         width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
                     </iframe>
                 </div>
