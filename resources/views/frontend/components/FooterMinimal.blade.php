@@ -11,9 +11,9 @@
 
         <!-- RIGHT -->
         <div class="flex items-center gap-6">
-            <a href="#" onclick="openPrivacy()" class="hover:underline text-gray-300 hover:text-white transition">
+            <p onclick="openPrivacy()" class="hover:underline text-gray-300 hover:text-white transition">
                 Privacy Policy
-            </a>
+            </p>
 
 
         </div>
