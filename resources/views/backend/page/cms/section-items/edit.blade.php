@@ -76,26 +76,21 @@
             </div>
 
             {{-- TITLE + DESCRIPTION --}}
-<div class="grid grid-cols-2 gap-4 mt-4">
+            <div class="grid grid-cols-2 gap-4 mt-4">
 
-    {{-- TITLE EN --}}
-    <input type="text"
-        name="title_en"
-        value="{{ old('title_en', $item->title_en) }}"
-        placeholder="Title EN"
-        class="border bg-gray-800 text-gray-400 px-2 rounded-xl">
+                {{-- TITLE EN --}}
+                <input type="text" name="title_en" value="{{ old('title_en', $item->title_en) }}" placeholder="Title EN"
+                    class="border bg-gray-800 text-gray-400 px-2 rounded-xl">
 
-    {{-- DESCRIPTION EN --}}
-    <textarea name="description_en"
-        class="w-full border bg-gray-800 text-gray-400 px-2 rounded-xl"
-        placeholder="Description EN">{{ old('description_en', $item->description_en) }}</textarea>
+                {{-- DESCRIPTION EN --}}
+                <textarea name="description_en" class="w-full border bg-gray-800 text-gray-400 px-2 rounded-xl"
+                    placeholder="Description EN">{{ old('description_en', $item->description_en) }}</textarea>
 
-    {{-- DESCRIPTION KM --}}
-<textarea id="description_km" name="description_km"
-    class="w-full border bg-gray-800 text-gray-400 px-2 rounded-xl"
-    placeholder="Description KM">{{ old('description_km', $item->description_km) }}</textarea>
+                {{-- DESCRIPTION KM --}}
+                <textarea id="description_km" name="description_km" class="w-full border bg-gray-800 text-gray-400 px-2 rounded-xl"
+                    placeholder="Description KM">{{ old('description_km', $item->description_km) }}</textarea>
 
-</div>
+            </div>
 
             {{-- IMAGE + ICON --}}
             <div class="grid grid-cols-2 gap-4 mt-4">
@@ -132,23 +127,26 @@
                 </div>
 
                 {{-- EXISTING --}}
-                @if($item->images && $existingCount)
+                @if ($item->images && $existingCount)
                     <div id="gallery-existing-edit" class="flex gap-2 overflow-x-scroll pb-2 mb-3" style="max-width:1136px">
-                        @foreach(array_reverse($item->images, true) as $index => $img)
+                        @foreach (array_reverse($item->images, true) as $index => $img)
                             <div class="relative group flex-shrink-0 w-24">
                                 <img src="{{ asset('storage/' . $img) }}"
-                                     class="w-24 h-20 object-cover rounded-xl border border-gray-700">
-                                <label class="absolute inset-0 flex items-end justify-center pb-1 opacity-0 group-hover:opacity-100 transition cursor-pointer">
+                                    class="w-24 h-20 object-cover rounded-xl border border-gray-700">
+                                <label
+                                    class="absolute inset-0 flex items-end justify-center pb-1 opacity-0 group-hover:opacity-100 transition cursor-pointer">
                                     <input type="checkbox" name="remove_images[]" value="{{ $index }}"
-                                           class="hidden peer"
-                                           onchange="toggleRemove(this)">
-                                    <span class="peer-checked:bg-red-600 bg-red-500/70 text-white text-xs px-2 py-0.5 rounded-lg select-none">
+                                        class="hidden peer" onchange="toggleRemove(this)">
+                                    <span
+                                        class="peer-checked:bg-red-600 bg-red-500/70 text-white text-xs px-2 py-0.5 rounded-lg select-none">
                                         Remove
                                     </span>
                                 </label>
-                                <div class="absolute top-1 right-1 w-5 h-5 bg-red-600 rounded hidden peer-checked:flex items-center justify-center pointer-events-none" id="mark-{{ $index }}">
-                                    <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                                <div class="absolute top-1 right-1 w-5 h-5 bg-red-600 rounded hidden peer-checked:flex items-center justify-center pointer-events-none"
+                                    id="mark-{{ $index }}">
+                                    <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" stroke-width="2.5"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                                     </svg>
                                 </div>
                             </div>
@@ -158,22 +156,21 @@
 
                 {{-- UPLOAD NEW --}}
                 <div id="gallery-drop-edit"
-                     class="border-2 border-dashed border-gray-700 rounded-xl p-5 text-center cursor-pointer hover:border-orange-500 transition"
-                     onclick="document.getElementById('gallery-input-edit').click()">
-                    <svg class="mx-auto mb-2 w-6 h-6 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/>
+                    class="border-2 border-dashed border-gray-700 rounded-xl p-5 text-center cursor-pointer hover:border-orange-500 transition"
+                    onclick="document.getElementById('gallery-input-edit').click()">
+                    <svg class="mx-auto mb-2 w-6 h-6 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.5"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
                     </svg>
                     <p class="text-gray-400 text-sm">Click or drag & drop to add more images</p>
                     <p class="text-gray-600 text-xs mt-1">JPG, PNG, GIF, WEBP — total max 40</p>
-                    <input type="file"
-                           id="gallery-input-edit"
-                           name="images[]"
-                           multiple
-                           accept="image/jpeg,image/png,image/gif,image/webp"
-                           class="hidden">
+                    <input type="file" id="gallery-input-edit" name="images[]" multiple
+                        accept="image/jpeg,image/png,image/gif,image/webp" class="hidden">
                 </div>
 
-                <div id="gallery-preview-edit" class="mt-3 flex gap-2 overflow-x-scroll pb-2" style="max-width:1136px"></div>
+                <div id="gallery-preview-edit" class="mt-3 flex gap-2 overflow-x-scroll pb-2" style="max-width:1136px">
+                </div>
                 <p id="gallery-error-edit" class="text-red-400 text-xs mt-1 hidden">Maximum 40 images total allowed.</p>
             </div>
 
@@ -207,7 +204,8 @@
             <div class="mt-4">
                 <label class="text-xs text-gray-100">Meta (JSON)</label>
 
-                <textarea name="meta" class="w-full border bg-gray-800 text-gray-400 p-2 rounded-xl" placeholder='{"key":"value"}'>{{ $item->meta ? json_encode($item->meta) : '' }}</textarea>
+                <textarea name="meta" class="w-full border bg-gray-800 text-gray-400 p-2 rounded-xl"
+                    placeholder='{"key":"value"}'>{{ $item->meta ? json_encode($item->meta) : '' }}</textarea>
             </div>
 
             {{-- ACTION --}}
@@ -232,21 +230,69 @@
 @endsection
 @push('scripts')
     <script>
-        ClassicEditor
-            .create(document.querySelector('#description_km'))
-            .catch(error => {
-                console.error(error);
-            });
+        ClassicEditor.create(document.querySelector('#description_km'), {
+            toolbar: [
+                'heading',
+                '|',
+                'bold', 'italic', 'underline',
+                '|',
+                'fontColor', 'fontBackgroundColor',
+                '|',
+                'bulletedList', 'numberedList',
+                '|',
+                'link', 'blockQuote',
+                '|',
+                'undo', 'redo'
+            ],
+
+            fontColor: {
+                colors: [{
+                        color: '#000000',
+                        label: 'Black'
+                    },
+                    {
+                        color: '#ffffff',
+                        label: 'White'
+                    },
+                    {
+                        color: '#ff0000',
+                        label: 'Red'
+                    },
+                    {
+                        color: '#0000ff',
+                        label: 'Blue'
+                    }
+                ]
+            },
+
+            link: {
+                addTargetToExternalLinks: true,
+                defaultProtocol: 'https://',
+                decorators: {
+                    openInNewTab: {
+                        mode: 'manual',
+                        label: 'Open in new tab',
+                        attributes: {
+                            target: '_blank',
+                            rel: 'noopener noreferrer'
+                        }
+                    }
+                }
+            }
+
+        }).catch(error => {
+            console.error(error);
+        });
 
         // ── Gallery images (edit) ────────────────────────────────
-        const MAX_EDIT      = 40;
+        const MAX_EDIT = 40;
         const existingCount = {{ $existingCount ?? 0 }};
-        const galleryInputE  = document.getElementById('gallery-input-edit');
-        const galleryDropE   = document.getElementById('gallery-drop-edit');
+        const galleryInputE = document.getElementById('gallery-input-edit');
+        const galleryDropE = document.getElementById('gallery-drop-edit');
         const galleryPreviewE = document.getElementById('gallery-preview-edit');
-        const newCountLabel  = document.getElementById('new-count-edit');
-        const galleryErrorE  = document.getElementById('gallery-error-edit');
-        let selectedFilesE   = [];
+        const newCountLabel = document.getElementById('new-count-edit');
+        const galleryErrorE = document.getElementById('gallery-error-edit');
+        let selectedFilesE = [];
 
         // How many existing images are NOT checked for removal
         function keptCount() {
@@ -320,7 +366,10 @@
 
         galleryInputE.addEventListener('change', () => addFilesEdit([...galleryInputE.files]));
 
-        galleryDropE.addEventListener('dragover', e => { e.preventDefault(); galleryDropE.classList.add('border-orange-500'); });
+        galleryDropE.addEventListener('dragover', e => {
+            e.preventDefault();
+            galleryDropE.classList.add('border-orange-500');
+        });
         galleryDropE.addEventListener('dragleave', () => galleryDropE.classList.remove('border-orange-500'));
         galleryDropE.addEventListener('drop', e => {
             e.preventDefault();
@@ -329,16 +378,23 @@
         });
         // Mouse-drag scroll
         function dragScroll(el) {
-            let isDown = false, startX, scrollLeft;
+            let isDown = false,
+                startX, scrollLeft;
             el.addEventListener('mousedown', e => {
                 isDown = true;
                 el.style.cursor = 'grabbing';
                 startX = e.pageX - el.offsetLeft;
                 scrollLeft = el.scrollLeft;
             });
-            el.addEventListener('mouseleave', () => { isDown = false; el.style.cursor = 'grab'; });
-            el.addEventListener('mouseup',    () => { isDown = false; el.style.cursor = 'grab'; });
-            el.addEventListener('mousemove',  e => {
+            el.addEventListener('mouseleave', () => {
+                isDown = false;
+                el.style.cursor = 'grab';
+            });
+            el.addEventListener('mouseup', () => {
+                isDown = false;
+                el.style.cursor = 'grab';
+            });
+            el.addEventListener('mousemove', e => {
                 if (!isDown) return;
                 e.preventDefault();
                 el.scrollLeft = scrollLeft - (e.pageX - el.offsetLeft - startX);
@@ -348,8 +404,8 @@
 
         // Apply to both preview rows
         dragScroll(document.getElementById('gallery-preview-edit'));
-        @if($item->images && count($item->images ?? []))
-        dragScroll(document.getElementById('gallery-existing-edit'));
+        @if ($item->images && count($item->images ?? []))
+            dragScroll(document.getElementById('gallery-existing-edit'));
         @endif
         // ────────────────────────────────────────────────────────
     </script>
@@ -371,4 +427,3 @@
         }
     </style>
 @endpush
-

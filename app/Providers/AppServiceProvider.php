@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\MenuGroup;
 use App\Models\Page;
 use App\Models\Cms\Setting;
+use App\Models\SectionItem;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -51,6 +52,14 @@ class AppServiceProvider extends ServiceProvider
             'contact',
             Setting::where('group_name', 'social')->get()
         );
+
+        View::composer('*', function ($view) {
+        $privacy = SectionItem::where('section_key', 'privacy')
+            ->where('is_active', 1)
+            ->first();
+
+        $view->with('privacy', $privacy);
+    });
     });
     }
 }

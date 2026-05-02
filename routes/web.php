@@ -144,7 +144,12 @@ Route::get("/", function () {
                 ->limit(4)
                 ->get();
 
-    return view('welcome',compact(['section','section2','contact','work','why_led','service','project','blog']));
+    $privacy = SectionItem::where('section_key', 'privacy')
+                ->where('is_active', 1)
+                ->orderBy('sort_order')
+                ->first();
+
+    return view('welcome',compact(['section','section2','contact','work','why_led','service','project','blog','privacy']));
 })->name('home');
 
 Route::get('/services', function (\Illuminate\Http\Request $request) {
@@ -211,18 +216,18 @@ Route::get('/why-us', function () {
 })->name('why-us');
 
 
-// STATIC PAGE FIRST (important)
-Route::get('/blog/event-guide', function () {
-    return view('frontend.pages.event-guide');
-})->name('blog.event-guides');
+// // STATIC PAGE FIRST (important)
+// Route::get('/blog/event-guide', function () {
+//     return view('frontend.pages.event-guide');
+// })->name('blog.event-guides');
 
-Route::get('/blog/led-knowledge', function () {
-    return view('frontend.pages.led-knowledge');
-})->name('blog.led-knowledge');
+// Route::get('/blog/led-knowledge', function () {
+//     return view('frontend.pages.led-knowledge');
+// })->name('blog.led-knowledge');
 
-Route::get('/blog/production-tip', function () {
-    return view('frontend.pages.production-tip');
-})->name('blog.production-tip');
+// Route::get('/blog/production-tip', function () {
+//     return view('frontend.pages.production-tip');
+// })->name('blog.production-tip');
 
 // BLOG LIST
 Route::get('/blog', function (\Illuminate\Http\Request $request) {

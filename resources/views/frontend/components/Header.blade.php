@@ -171,17 +171,17 @@
                         All Articles
                     </a>
 
-                    <a href="/blog/event-guide">
-                        Event Guides
-                    </a>
+                    <a href="{{ route('blog', ['type' => 'Event Guides']) }}">
+    Event Guides
+</a>
 
-                    <a href="/blog/led-knowledge">
-                        LED Knowledge
-                    </a>
+<a href="{{ route('blog', ['type' => 'LED Knowledge']) }}">
+    LED Knowledge
+</a>
 
-                    <a href="/blog/production-tip">
-                        Production Tips
-                    </a>
+<a href="{{ route('blog', ['type' => 'Production Tips']) }}">
+    Production Tips
+</a>
 
                 </div>
             </div>
@@ -330,15 +330,15 @@
                                         All Articles
                                     </a>
 
-                                    <a href="/blog/event-guide">
+                                    <a href="{{ route('blog', ['type' => 'Event Guides']) }}">
                                         Event Guides
                                     </a>
 
-                                    <a href="/blog/led-knowledge">
+                                    <a href="{{ route('blog', ['type' => 'LED Knowledge']) }}">
                                         LED Knowledge
                                     </a>
 
-                                    <a href="/blog/production-tip">
+                                    <a href="{{ route('blog', ['type' => 'Production Tips']) }}">
                                         Production Tips
                                     </a>
 

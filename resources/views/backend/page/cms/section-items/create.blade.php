@@ -205,7 +205,7 @@
 @endsection
 @push('scripts')
     <script>
-        ClassicEditor.create(document.querySelector('#description_en'), {
+        ClassicEditor.create(document.querySelector('#description_km'), {
             toolbar: [
                 'heading',
                 '|',

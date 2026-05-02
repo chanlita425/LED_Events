@@ -8,6 +8,7 @@
 
     <link rel="icon" type="image/png" href="{{ asset('images/logo2.png') }}">
 
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/super-build/ckeditor.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
 
     <title>LED Events Cambodia</title>

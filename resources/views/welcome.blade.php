@@ -235,7 +235,7 @@
 
             @foreach ($work as $item)
                 <div class="space-y-3">
-                    <p class="text-3xl sm:text-4xl font-bold">{{ $item->title_en }}</p>
+                    <p class="text-2xl font-bold">{{ $item->title_en }}</p>
                     <p class="text-sm sm:text-base leading-relaxed">
                         {{ $item->description_en }}
                     </p>

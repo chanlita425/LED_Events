@@ -176,18 +176,53 @@
 
             <!-- RIGHT -->
             <div class="flex items-center gap-6">
-                <a href="#" class="hover:underline text-gray-300 hover:text-white transition">
+                <a href="#" onclick="openPrivacy()"
+                    class="hover:underline text-gray-300 hover:text-white transition">
                     Privacy Policy
                 </a>
 
-            
+
             </div>
 
         </div>
     </div>
 
+    <!-- PRIVACY MODAL -->
+    <div id="privacyModal"
+    class="fixed inset-0 bg-black/70 hidden flex items-center justify-center z-50">
+
+    <div class="bg-white w-full max-w-3xl h-[80vh] rounded-lg shadow-lg flex flex-col">
+
+        <div class="flex justify-between items-center p-4 border-b">
+            <h2 class="text-xl font-bold">Privacy Policy</h2>
+            <button onclick="closePrivacy()" class="text-2xl font-bold">✕</button>
+        </div>
+
+        <div class="p-6 overflow-y-auto text-black leading-relaxed">
+            {!! $privacy->description_km ?? '' !!}
+        </div>
+
+    </div>
 </div>
 
+</div>
 <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+function openPrivacy() {
+    const modal = document.getElementById('privacyModal');
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+}
+
+function closePrivacy() {
+    const modal = document.getElementById('privacyModal');
+    modal.classList.add('hidden');
+    document.body.style.overflow = '';
+}
+
+// click outside
+document.getElementById('privacyModal').addEventListener('click', function (e) {
+    if (e.target === this) {
+        closePrivacy();
+    }
+});
 </script>
