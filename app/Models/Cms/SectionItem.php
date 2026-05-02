@@ -27,6 +27,7 @@ class SectionItem extends Model
         'is_active',
         'type',
         'meta',
+        'decription'
     ];
 
     protected $casts = [

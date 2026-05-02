@@ -20,7 +20,7 @@
 
     <div class="max-w-4xl mx-auto py-20 text-white px-5">
 
-        @foreach (explode("\n", $project->description_en) as $line)
+        @foreach (explode("\n", $project->description_km) as $line)
             @if (trim($line))
                 <p class="prose text-gray-300 text-lg leading-relaxed mb-4">
                     {!! $line !!}

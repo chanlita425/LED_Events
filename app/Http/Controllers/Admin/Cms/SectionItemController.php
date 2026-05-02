@@ -93,6 +93,7 @@ class SectionItemController extends Controller
 
             'title_en'       => 'nullable|string|max:255',
             'title_km'       => 'nullable|string|max:255',
+            'description'    => 'nullable|string',
             'description_en' => 'nullable|string',
             'description_km' => 'nullable|string',
 
@@ -176,6 +177,7 @@ class SectionItemController extends Controller
 
             'title_en'       => 'nullable|string|max:255',
             'title_km'       => 'nullable|string|max:255',
+            'description'    => 'nullable|string',
             'description_en' => 'nullable|string',
             'description_km' => 'nullable|string',
 

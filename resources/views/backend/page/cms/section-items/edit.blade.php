@@ -76,15 +76,26 @@
             </div>
 
             {{-- TITLE + DESCRIPTION --}}
-            <div class="grid grid-cols-2 gap-4 mt-4">
+<div class="grid grid-cols-2 gap-4 mt-4">
 
-                <input type="text" name="title_en" value="{{ old('title_en', $item->title_en) }}" placeholder="Title EN"
-                    class="border bg-gray-800 text-gray-400 p-2 rounded-xl">
+    {{-- TITLE EN --}}
+    <input type="text"
+        name="title_en"
+        value="{{ old('title_en', $item->title_en) }}"
+        placeholder="Title EN"
+        class="border bg-gray-800 text-gray-400 px-2 rounded-xl">
 
-                <textarea id="description_en" name="description_en" class="w-full border bg-gray-800 text-black px-2 rounded-xl">
-    {{ old('description_en', $item->description_en) }}
-</textarea>
-            </div>
+    {{-- DESCRIPTION EN --}}
+    <textarea name="description_en"
+        class="w-full border bg-gray-800 text-gray-400 px-2 rounded-xl"
+        placeholder="Description EN">{{ old('description_en', $item->description_en) }}</textarea>
+
+    {{-- DESCRIPTION KM --}}
+<textarea id="description_km" name="description_km"
+    class="w-full border bg-gray-800 text-gray-400 px-2 rounded-xl"
+    placeholder="Description KM">{{ old('description_km', $item->description_km) }}</textarea>
+
+</div>
 
             {{-- IMAGE + ICON --}}
             <div class="grid grid-cols-2 gap-4 mt-4">
@@ -222,7 +233,7 @@
 @push('scripts')
     <script>
         ClassicEditor
-            .create(document.querySelector('#description_en'))
+            .create(document.querySelector('#description_km'))
             .catch(error => {
                 console.error(error);
             });
