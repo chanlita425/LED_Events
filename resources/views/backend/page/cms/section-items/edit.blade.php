@@ -229,60 +229,65 @@
 
 @endsection
 @push('scripts')
+
     <script>
-        ClassicEditor.create(document.querySelector('#description_km'), {
-            toolbar: [
-                'heading',
-                '|',
-                'bold', 'italic', 'underline',
-                '|',
-                'fontColor', 'fontBackgroundColor',
-                '|',
-                'bulletedList', 'numberedList',
-                '|',
-                'link', 'blockQuote',
-                '|',
-                'undo', 'redo'
-            ],
+        ClassicEditor
+            .create(document.querySelector('#description_km'), {
+                toolbar: {
+                    items: [
+                        'heading',
+                        '|',
+                        'bold', 'italic', 'underline',
+                        '|',
+                        'fontColor', 'fontBackgroundColor',
+                        '|',
+                        'bulletedList', 'numberedList',
+                        '|',
+                        'link', 'blockQuote',
+                        '|',
+                        'undo', 'redo'
+                    ]
+                },
 
-            fontColor: {
-                colors: [{
-                        color: '#000000',
-                        label: 'Black'
-                    },
-                    {
-                        color: '#ffffff',
-                        label: 'White'
-                    },
-                    {
-                        color: '#ff0000',
-                        label: 'Red'
-                    },
-                    {
-                        color: '#0000ff',
-                        label: 'Blue'
-                    }
-                ]
-            },
+                // Enable Font Color & Background Color
+                fontColor: {
+                    colors: [
+                        { color: '#000000', label: 'Black' },
+                        { color: '#ffffff', label: 'White' },
+                        { color: '#e74c3c', label: 'Red' },
+                        { color: '#3498db', label: 'Blue' },
+                        { color: '#2ecc71', label: 'Green' },
+                        { color: '#f1c40f', label: 'Yellow' },
+                        { color: '#9b59b6', label: 'Purple' },
+                    ]
+                },
 
-            link: {
-                addTargetToExternalLinks: true,
-                defaultProtocol: 'https://',
-                decorators: {
-                    openInNewTab: {
-                        mode: 'manual',
-                        label: 'Open in new tab',
-                        attributes: {
-                            target: '_blank',
-                            rel: 'noopener noreferrer'
-                        }
-                    }
+                fontBackgroundColor: {
+                    colors: [
+                        { color: '#ffff00', label: 'Yellow' },
+                        { color: '#ffcccc', label: 'Light Red' },
+                        { color: '#ccffcc', label: 'Light Green' },
+                        { color: '#cce6ff', label: 'Light Blue' },
+                    ]
+                },
+
+                // Optional: Better Khmer support
+                language: 'km',
+
+                heading: {
+                    options: [
+                        { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                        { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                        { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
+                    ]
                 }
-            }
-
-        }).catch(error => {
-            console.error(error);
-        });
+            })
+            .then(editor => {
+                console.log('CKEditor 5 is ready ✅');
+            })
+            .catch(error => {
+                console.error('CKEditor error:', error);
+            });
 
         // ── Gallery images (edit) ────────────────────────────────
         const MAX_EDIT = 40;

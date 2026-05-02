@@ -133,118 +133,115 @@
         </div>
     </div>
 
+    <style>
+        iframe {
+    pointer-events: none;   /* Prevent clicking on video */
+}
+    </style>
+
 
     {{-- JS --}}
     <script>
+    document.addEventListener("DOMContentLoaded", () => {
         const mediaItems = @json($event);
-        document.addEventListener("DOMContentLoaded", () => {
+        const container = document.getElementById("carousel");
 
-            const mediaItems = @json($event);
-            const container = document.getElementById("carousel");
+        let currentIndex = 0;
 
-            let currentIndex = 0;
+        function getVisibleCards() {
+            if (window.innerWidth < 640) return 1;
+            if (window.innerWidth < 1024) return 2;
+            return 3;
+        }
 
-            function getVisibleCards() {
-                if (window.innerWidth < 640) return 1;
-                if (window.innerWidth < 1024) return 2;
-                return 3;
+        function convertToEmbed(url) {
+            if (!url) return "";
+
+            const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&?]+)/);
+
+            if (match && match[1]) {
+                const videoId = match[1];
+                return `https://www.youtube.com/embed/${videoId}?` +
+                       `autoplay=1&mute=1&loop=1&playlist=${videoId}&` +
+                       `controls=0&modestbranding=1&rel=0&iv_load_policy=3&fs=0&` +
+                       `disablekb=1&cc_load_policy=0&playsinline=1`;
             }
+            return url;
+        }
 
-            function convertToEmbed(url) {
-                if (!url) return "";
+        function renderCards() {
+            if (!container) return;
+            container.innerHTML = "";
 
-                const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]+)/);
+            mediaItems.forEach(item => {
+                let mediaHtml = "";
 
-                if (match) {
-                    return `https://www.youtube.com/embed/${match[1]}`;
+                if (item.link) {
+                    const embedUrl = convertToEmbed(item.link);
+                    mediaHtml = `
+                        <iframe
+                            class="rounded-md w-full h-48 aspect-video"
+                            src="${embedUrl}"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    `;
+                } else {
+                    mediaHtml = `
+                        <img src="${item.image ? '/storage/' + item.image : '/images/no-image.jpg'}"
+                             alt="${item.title_en ?? ''}"
+                             class="rounded-md w-full h-48 object-cover">
+                    `;
                 }
 
-                return url;
-            }
-
-            function renderCards() {
-                if (!container) return;
-
-                container.innerHTML = "";
-
-                mediaItems.forEach(item => {
-
-                    let mediaHtml = "";
-
-                    if (item.link) {
-                        const embed = convertToEmbed(item.link);
-
-                        mediaHtml = `
-                    <iframe
-                        class="rounded-md w-full h-48"
-                        src="${embed}"
-                        frameborder="0"
-                        allowfullscreen>
-                    </iframe>
-                `;
-                    } else {
-                        mediaHtml = `
-                    <img src="${item.image ? '/storage/' + item.image : '/images/no-image.jpg'}"
-                         alt="${item.title_en ?? ''}"
-                         class="rounded-md w-full h-48 object-cover">
-                `;
-                    }
-
-                    container.innerHTML += `
-                <div class="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 px-2">
-                    <div class="bg-gradient-to-b from-[#383535] to-[#000000]
-                        p-5 border border-[#272727] rounded-md flex flex-col h-full">
-
-                        ${mediaHtml}
-
-                        <div class="p-3 flex flex-col flex-1 text-white">
-                            <p class="font-bold">${item.title_en ?? ''}</p>
-
-                            <p class="text-sm mt-2 line-clamp-3">
-                                ${item.description_en ?? ''}
-                            </p>
-
-                            <div class="mt-auto">
-                                <a href="/media/${item.id}"
-                                   class="mt-4 border px-6 py-2 text-sm w-fit inline-block">
-                                   Read More
-                                </a>
+                container.innerHTML += `
+                    <div class="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 px-2">
+                        <div class="bg-gradient-to-b from-[#383535] to-[#000000] p-5 border border-[#272727] rounded-md flex flex-col h-full">
+                            ${mediaHtml}
+                            <div class="p-3 flex flex-col flex-1 text-white">
+                                <p class="font-bold">${item.title_en ?? ''}</p>
+                                <p class="text-sm mt-2 line-clamp-3">${item.description_en ?? ''}</p>
+                                <div class="mt-auto">
+                                    <a href="/media/${item.id}" class="mt-4 border px-6 py-2 text-sm w-fit inline-block">
+                                        Read More
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            `;
-                });
-            }
-
-            function updateCarousel() {
-                const visible = getVisibleCards();
-                const percent = 100 / visible;
-                container.style.transform = `translateX(-${currentIndex * percent}%)`;
-            }
-
-            window.nextSlide = function() {
-                const visible = getVisibleCards();
-
-                if (currentIndex < mediaItems.length - visible) {
-                    currentIndex++;
-                    updateCarousel();
-                }
-            };
-
-            window.prevSlide = function() {
-                if (currentIndex > 0) {
-                    currentIndex--;
-                    updateCarousel();
-                }
-            };
-
-            window.addEventListener('resize', () => {
-                currentIndex = 0;
-                updateCarousel();
+                `;
             });
+        }
 
-            renderCards();
+        function updateCarousel() {
+            const visible = getVisibleCards();
+            const percent = 100 / visible;
+            container.style.transform = `translateX(-${currentIndex * percent}%)`;
+        }
+
+        window.nextSlide = function() {
+            const visible = getVisibleCards();
+            if (currentIndex < mediaItems.length - visible) {
+                currentIndex++;
+                updateCarousel();
+            }
+        };
+
+        window.prevSlide = function() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateCarousel();
+            }
+        };
+
+        window.addEventListener('resize', () => {
+            currentIndex = 0;
+            updateCarousel();
         });
-    </script>
+
+        renderCards();
+        setTimeout(updateCarousel, 100);
+    });
+</script>
 @endsection
