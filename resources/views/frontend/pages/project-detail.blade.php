@@ -27,6 +27,8 @@
                 </p>
             @endif
         @endforeach
+        <br>
+        <br>
         @if (!empty($project->images))
             <div class="max-w-6xl mx-auto px-5 pb-20">
 

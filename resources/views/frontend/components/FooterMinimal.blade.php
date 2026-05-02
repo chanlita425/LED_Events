@@ -14,9 +14,7 @@
                 Privacy Policy
             </a>
 
-            <a href="#" class="hover:underline text-gray-300 hover:text-white transition">
-                Terms of Service
-            </a>
+           
         </div>
 
     </div>
