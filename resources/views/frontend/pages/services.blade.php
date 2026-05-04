@@ -33,11 +33,46 @@
                 What We Provide
             </h2>
 
-            <div class=" space-y-16 px-5 ">
+            <div class="space-y-16 px-5">
+
+                @foreach ($services as $item)
+                    @php
+                        $isEven = $loop->index % 2 == 0;
+                    @endphp
+
+                    <div id="{{ Str::slug($item->title_en) }}"
+                        class="grid grid-cols-1 md:grid-cols-3 gap-10 items-center py-3 px-8 rounded-md border border-[#272727] bg-gradient-to-r from-white/10 to-black">
+
+                        {{-- IMAGE LEFT --}}
+                        @if ($isEven)
+                            <img src="{{ Storage::url($item->image) }}"
+                                class="md:col-span-2 w-full h-[276px] object-cover rounded-md" alt="{{ $item->title_en }}">
+                        @endif
+
+                        {{-- TEXT --}}
+                        <div>
+                            <h2 class="text-2xl font-bold">{{ $item->title_en }}</h2>
+
+                            <p class="mt-3 text-sm">
+                                {{ $item->description_en }}
+                            </p>
+
+                            <a href="/contact" class="mt-4 inline-block border px-6 py-2">
+                                Contact Us
+                            </a>
+                        </div>
+
+                        {{-- IMAGE RIGHT --}}
+                        @if (!$isEven)
+                            <img src="{{ Storage::url($item->image) }}"
+                                class="md:col-span-2 w-full h-[276px] object-cover rounded-md" alt="{{ $item->title_en }}">
+                        @endif
+
+                    </div>
+                @endforeach
 
 
-
-                <!-- LED SCREEN RENTAL -->
+                {{-- <!-- LED SCREEN RENTAL -->
                 <div id="led-screen-rental"
                     class="grid grid-cols-1 md:grid-cols-3 gap-10 items-center py-3 px-8 rounded-md border border-[#272727] bg-gradient-to-r from-white/10 to-black">
 
@@ -47,7 +82,8 @@
                     <div>
                         <h2 class="text-2xl font-bold">LED Screen Rental</h2>
                         <p class="mt-3 text-sm">
-                            Provision of indoor and outdoor LED display screens, including installation and live technical operation.
+                            Provision of indoor and outdoor LED display screens, including installation and live technical
+                            operation.
                         </p>
                         <a href="/contact" class="mt-4 inline-block border px-6 py-2">
                             Contact Us
@@ -130,7 +166,7 @@
                             Contact Us
                         </a>
                     </div>
-                </div>
+                </div> --}}
 
             </div>
         </div>
@@ -308,7 +344,8 @@
                             <p class="line-clamp-5">{{ $item->description_en }}</p>
                             <a href="{{ route('projects', [
                                 'type' => Str::slug($item->title_en),
-                            ]) }}" class="border border-white py-3 flex items-center justify-center">
+                            ]) }}"
+                                class="border border-white py-3 flex items-center justify-center">
                                 Find Out More
                             </a>
                         </div>

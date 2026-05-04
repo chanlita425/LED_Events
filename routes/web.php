@@ -161,6 +161,11 @@ Route::get('/services', function (\Illuminate\Http\Request $request) {
     ->orderBy('sort_order')
     ->first();
 
+    $services = SectionItem::where('section_key','services')
+            ->where('is_active',1)
+            ->orderBy('sort_order')
+            ->get();
+
     $service = SectionItem::where('section_key', 'services')
         ->where('is_active', 1)
         ->when($type, function ($q) use ($type) {
@@ -181,7 +186,7 @@ Route::get('/services', function (\Illuminate\Http\Request $request) {
             ->limit(4)
             ->get();
 
-    return view('frontend.pages.services', compact('service', 'type','section','us','case'));
+    return view('frontend.pages.services', compact('service','services', 'type','section','us','case'));
 
 })->name('services');
 
