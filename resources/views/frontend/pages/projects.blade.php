@@ -124,7 +124,7 @@
         <div class="flex items-center justify-center">
             <a href="{{ route('projects', array_merge(request()->all(), ['all' => 1])) }}"
                 class="w-[327px] h-[67px] border border-white my-20 flex items-center justify-center text-white">
-                Find Out More
+                Explore More
             </a>
         </div>
     @endif

@@ -372,10 +372,11 @@
                     </p>
 
                     <div class="mt-auto">
-                        <a href="/service/${item.id}"
-                           class="mt-4 border px-6 py-2 text-sm cursor-pointer w-fit inline-block">
-                           More Detail
-                        </a>
+                        
+                         <a href="/services#${item.title_en.toLowerCase().replace(/\s+/g, '-')}"
+   class="mt-4 border px-6 py-2 text-sm cursor-pointer w-fit inline-block">
+   More Detail
+</a>
                     </div>
 
                 </div>
