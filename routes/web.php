@@ -55,9 +55,9 @@ Route::prefix('admin')
 
     Route::resource('menus',         MenuController::class)->except(['show']);
 
-
     Route::resource('pages',         PageController::class);
     Route::resource('page-sections', PageSectionController::class);
+    
 
 
     // ── section ──────────────────────────
@@ -67,14 +67,43 @@ Route::prefix('admin')
     Route::resource('media-files',   MediaFileController::class)->only(['index', 'store', 'show', 'destroy']);
 
 
+    // section by section_item 
+    Route::get(
+            'home-sections',
+            [SectionItemController::class, 'homeSections']
+        )->name('sections.home_section');
+
+    Route::get(
+            'service-sections',
+            [SectionItemController::class, 'serviceSections']
+        )->name('sections.service_section');
+
+    Route::get(
+        'project-sections',
+        [SectionItemController::class, 'projectSections']
+    )->name('sections.project_section');
+
+    Route::get(
+        'blog-sections',
+        [SectionItemController::class, 'blogSections']
+    )->name('sections.blog_section');
+
+    Route::get(
+        'media-sections',
+        [SectionItemController::class, 'mediaSections']
+    )->name('sections.media_section');
+
+    Route::get(
+        'why-us-sections',
+        [SectionItemController::class, 'whyUsSections']
+    )->name('sections.whyus_section');
+
      // ── SETTINGS ──────────────────────────
     Route::resource('settings', SettingController::class);
     Route::delete('/admin/settings/{id}', [SettingController::class, 'destroy'])
         ->name('admin.settings.destroy');
     Route::put('settings/{setting}/quick-update', [SettingController::class, 'quickUpdate'])
         ->name('settings.quick-update');
-
-
 
     // ── Users ─────────────────────────────────────────────
     Route::resource('users', UserController::class);

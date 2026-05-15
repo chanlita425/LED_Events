@@ -165,10 +165,10 @@
         {{-- FOOTER --}}
         <div class="flex justify-end gap-2 px-4 py-3 border-t border-gray-800/60">
 
-            <a href="{{ route('admin.section-items.index') }}"
-               class="px-3 py-1.5 text-sm bg-gray-800 hover:bg-gray-700 text-white rounded border border-gray-800/60">
-                Back
-            </a>
+           <a href="{{ $backRoute }}"
+   class="px-3 py-1.5 text-sm bg-gray-800 hover:bg-gray-700 text-white rounded border border-gray-800/60">
+    Back
+</a>
 
             <a href="{{ route('admin.section-items.edit', $item->id) }}"
                class="px-3 py-1.5 text-sm bg-orange-500 hover:bg-orange-600 text-white rounded">

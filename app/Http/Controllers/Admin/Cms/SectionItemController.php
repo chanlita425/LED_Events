@@ -58,7 +58,21 @@ class SectionItemController extends Controller
     public function show(string $id)
     {
         $item = SectionItem::findOrFail($id);
-        return view('backend.page.cms.section-items.show', compact('item'));
+
+        $backRoute = match ($item->page) {
+            'home'     => route('admin.sections.home_section'),
+            'services' => route('admin.sections.service_section'),
+            'projects' => route('admin.sections.project_section'),
+            'blog'     => route('admin.sections.blog_section'),
+            'media'    => route('admin.sections.media_section'),
+            'why_us'   => route('admin.sections.whyus_section'),
+            default    => route('admin.section-items.index'),
+        };
+
+        return view(
+            'backend.page.cms.section-items.show',
+            compact('item', 'backRoute')
+        );
     }
 
     public function create()
@@ -139,9 +153,23 @@ class SectionItemController extends Controller
             $data['meta'] = json_last_error() === JSON_ERROR_NONE ? $decoded : null;
         }
 
-        SectionItem::create($data);
+        SectionItem::create($data); 
 
-        return redirect()->route('admin.section-items.index')
+        // SMART REDIRECT BASED ON PAGE
+        $page = $data['page'] ?? null;
+
+        $redirectRoute = match ($page) {
+            'home'     => 'admin.sections.home_section',
+            'services' => 'admin.sections.service_section',
+            'projects' => 'admin.sections.project_section',
+            'blog'     => 'admin.sections.blog_section',
+            'media'    => 'admin.sections.media_section',
+            'why_us'   => 'admin.sections.why_us_section',
+            default    => 'admin.section-items.index',
+        };
+
+        return redirect()
+            ->route($redirectRoute)
             ->with('success', 'Item created successfully.');
     }
 
@@ -246,33 +274,297 @@ class SectionItemController extends Controller
             $data['meta'] = json_last_error() === JSON_ERROR_NONE ? $decoded : null;
         }
 
-        $item->update($data);
+        $item->update($data); 
 
-        return redirect()->route('admin.section-items.index')
-            ->with('success', 'Item updated successfully.');
+        // SMART REDIRECT AFTER UPDATE
+        $page = $item->page ?? null;
+
+        $redirectRoute = match ($page) {
+            'home'     => 'admin.sections.home_section',
+            'services' => 'admin.sections.service_section',
+            'projects' => 'admin.sections.project_section',
+            'blog'     => 'admin.sections.blog_section',
+            'media'    => 'admin.sections.media_section',
+            'why_us'   => 'admin.sections.why_us_section',
+            default    => 'admin.section-items.index',
+        };
+
+        return redirect()
+            ->route($redirectRoute)
+            ->with('success', 'Item updated successfully.'); 
     }
 
     public function destroy(string $id)
     {
         $item = SectionItem::findOrFail($id);
 
+        // SAVE PAGE BEFORE DELETE
+        $page = $item->page;
+
+        // DELETE MAIN IMAGE
         if ($item->image) {
             Storage::disk('public')->delete($item->image);
         }
 
+        // DELETE ICON
         if ($item->icon) {
             Storage::disk('public')->delete($item->icon);
         }
 
+        // DELETE GALLERY
         if ($item->images) {
             foreach ($item->images as $img) {
                 Storage::disk('public')->delete($img);
             }
         }
 
+        // DELETE ITEM
         $item->delete();
 
-        return redirect()->route('admin.section-items.index')
-            ->with('success', 'Item deleted.');
+        // SMART REDIRECT
+        $redirectRoute = match ($page) {
+            'home'     => 'admin.sections.home_section',
+            'services' => 'admin.sections.service_section',
+            'projects' => 'admin.sections.project_section',
+            'blog'     => 'admin.sections.blog_section',
+            'media'    => 'admin.sections.media_section',
+            'why_us'   => 'admin.sections.why_us_section',
+            default    => 'admin.section-items.index',
+        };
+
+        return redirect()
+            ->route($redirectRoute)
+            ->with('success', 'Item deleted successfully.');
     }
+
+
+    public function homeSections(Request $request)
+    {
+        $query = SectionItem::query()
+            ->where('page', 'home');
+
+        if ($request->section) {
+            $query->where('section_key', $request->section);
+        }
+
+        $items = $query
+            ->orderBy('section_key')
+            ->orderBy('sort_order')
+            ->get()
+            ->groupBy('section_key');
+
+        $sections = SectionItem::where('page', 'home')
+            ->select('section_key')
+            ->distinct()
+            ->pluck('section_key');
+
+        return view(
+            'backend.page.cms.sections.home_section',
+            compact('items', 'sections')
+        );
+    }
+
+    public function serviceSections(Request $request)
+    {
+        $query = SectionItem::query()
+            ->where('page', 'services');
+
+        if ($request->section) {
+            $query->where('section_key', $request->section);
+        }
+
+        $items = $query
+            ->orderBy('section_key')
+            ->orderBy('sort_order')
+            ->get()
+            ->groupBy('section_key');
+
+        $sections = SectionItem::where('page', 'services')
+            ->select('section_key')
+            ->distinct()
+            ->pluck('section_key');
+
+        return view(
+            'backend.page.cms.sections.service_section',
+            compact('items', 'sections')
+        );
+    }
+
+    public function projectSections(Request $request)
+    {
+        $query = SectionItem::query()
+            ->where('page', 'projects');
+
+        // filter section
+        if ($request->section) {
+            $query->where('section_key', $request->section);
+        }
+
+        // filter status (same as index style)
+        if ($request->status !== null && $request->status !== '') {
+            $query->where('is_active', $request->status);
+        }
+
+        // search (same behavior as index)
+        if ($request->search) {
+            $search = $request->search;
+
+            $query->where(function ($q) use ($search) {
+                $q->where('title_en', 'like', "%$search%")
+                ->orWhere('title_km', 'like', "%$search%")
+                ->orWhere('description_en', 'like', "%$search%")
+                ->orWhere('section_key', 'like', "%$search%");
+            });
+        }
+
+        $items = $query
+            ->orderBy('section_key')
+            ->orderBy('sort_order')
+            ->get()
+            ->groupBy('section_key');
+
+        $sections = SectionItem::where('page', 'projects')
+            ->select('section_key')
+            ->distinct()
+            ->pluck('section_key');
+
+        return view(
+            'backend.page.cms.sections.project_section',
+            compact('items', 'sections')
+        );
+    }
+
+    public function blogSections(Request $request)
+    {
+        $query = SectionItem::query()
+            ->where('page', 'blog');
+
+        // filter section
+        if ($request->section) {
+            $query->where('section_key', $request->section);
+        }
+
+        // status filter
+        if ($request->status !== null && $request->status !== '') {
+            $query->where('is_active', $request->status);
+        }
+
+        // search
+        if ($request->search) {
+            $search = $request->search;
+
+            $query->where(function ($q) use ($search) {
+                $q->where('title_en', 'like', "%$search%")
+                ->orWhere('title_km', 'like', "%$search%")
+                ->orWhere('description_en', 'like', "%$search%")
+                ->orWhere('section_key', 'like', "%$search%");
+            });
+        }
+
+        $items = $query
+            ->orderBy('section_key')
+            ->orderBy('sort_order')
+            ->get()
+            ->groupBy('section_key');
+
+        $sections = SectionItem::where('page', 'blog')
+            ->select('section_key')
+            ->distinct()
+            ->pluck('section_key');
+
+        return view(
+            'backend.page.cms.sections.blog_section',
+            compact('items', 'sections')
+        );
+    }
+
+    public function mediaSections(Request $request)
+    {
+        $query = SectionItem::query()
+            ->where('page', 'media');
+
+        // filter section
+        if ($request->section) {
+            $query->where('section_key', $request->section);
+        }
+
+        // status filter
+        if ($request->status !== null && $request->status !== '') {
+            $query->where('is_active', $request->status);
+        }
+
+        // search
+        if ($request->search) {
+            $search = $request->search;
+
+            $query->where(function ($q) use ($search) {
+                $q->where('title_en', 'like', "%$search%")
+                ->orWhere('title_km', 'like', "%$search%")
+                ->orWhere('description_en', 'like', "%$search%")
+                ->orWhere('section_key', 'like', "%$search%");
+            });
+        }
+
+        $items = $query
+            ->orderBy('section_key')
+            ->orderBy('sort_order')
+            ->get()
+            ->groupBy('section_key');
+
+        $sections = SectionItem::where('page', 'media')
+            ->select('section_key')
+            ->distinct()
+            ->pluck('section_key');
+
+        return view(
+            'backend.page.cms.sections.media_section',
+            compact('items', 'sections')
+        );
+    }
+
+
+    public function whyUsSections(Request $request)
+    {
+        $query = SectionItem::query()
+            ->where('page', 'why-us');
+
+        // filter section
+        if ($request->section) {
+            $query->where('section_key', $request->section);
+        }
+
+        // status filter
+        if ($request->status !== null && $request->status !== '') {
+            $query->where('is_active', $request->status);
+        }
+
+        // search
+        if ($request->search) {
+            $search = $request->search;
+
+            $query->where(function ($q) use ($search) {
+                $q->where('title_en', 'like', "%$search%")
+                ->orWhere('title_km', 'like', "%$search%")
+                ->orWhere('description_en', 'like', "%$search%")
+                ->orWhere('section_key', 'like', "%$search%");
+            });
+        }
+
+        $items = $query
+            ->orderBy('section_key')
+            ->orderBy('sort_order')
+            ->get()
+            ->groupBy('section_key');
+
+        $sections = SectionItem::where('page', 'why_us')
+            ->select('section_key')
+            ->distinct()
+            ->pluck('section_key');
+
+        return view(
+            'backend.page.cms.sections.whyus_section',
+            compact('items', 'sections')
+        );
+    }
+
 }

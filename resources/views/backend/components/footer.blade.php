@@ -4,7 +4,7 @@
 
         <div class="flex items-center gap-4">
             {{-- Legal Links --}}
-            <a href="{{ route('privacy') }}"
+            {{-- <a href="{{ route('privacy') }}"
                class="hover:text-orange-400 transition {{ request()->routeIs('privacy') ? 'text-orange-400' : '' }}">
                 Privacy Policy
             </a>
@@ -12,7 +12,7 @@
             <a href="{{ route('terms') }}"
                class="hover:text-orange-400 transition {{ request()->routeIs('terms') ? 'text-orange-400' : '' }}">
                 Terms of Service
-            </a>
+            </a> --}}
             <span class="w-px h-3 bg-white/10 hidden sm:block"></span>
             {{-- Status --}}
             <span class="hidden sm:flex items-center gap-1.5">

@@ -2758,6 +2758,7 @@ namespace App\Models {
      * @property string|null $button_text_en
      * @property string|null $link
      * @property string|null $icon
+     * @property string|null $images
      * @property string|null $image
      * @property string|null $description_km
      * @property string|null $description_en
@@ -2778,6 +2779,7 @@ namespace App\Models {
      * @method static \Illuminate\Database\Eloquent\Builder<SectionItem>|SectionItem whereDescriptionEn($value)
      * @method static \Illuminate\Database\Eloquent\Builder<SectionItem>|SectionItem whereDescriptionKm($value)
      * @method static \Illuminate\Database\Eloquent\Builder<SectionItem>|SectionItem whereImage($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<SectionItem>|SectionItem whereImages($value)
      * @method static \Illuminate\Database\Eloquent\Builder<SectionItem>|SectionItem whereIcon($value)
      * @method static \Illuminate\Database\Eloquent\Builder<SectionItem>|SectionItem whereLink($value)
      * @method static \Illuminate\Database\Eloquent\Builder<SectionItem>|SectionItem whereButtonTextEn($value)
@@ -5881,6 +5883,7 @@ namespace App\Models\Cms {
      * @property string|null $button_text_en
      * @property string|null $link
      * @property string|null $icon
+     * @property array|null $images
      * @property string|null $image
      * @property string|null $description_km
      * @property string|null $description_en
@@ -5902,6 +5905,7 @@ namespace App\Models\Cms {
      * @method static \Illuminate\Database\Eloquent\Builder<SectionItem>|SectionItem whereDescriptionEn($value)
      * @method static \Illuminate\Database\Eloquent\Builder<SectionItem>|SectionItem whereDescriptionKm($value)
      * @method static \Illuminate\Database\Eloquent\Builder<SectionItem>|SectionItem whereImage($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<SectionItem>|SectionItem whereImages($value)
      * @method static \Illuminate\Database\Eloquent\Builder<SectionItem>|SectionItem whereIcon($value)
      * @method static \Illuminate\Database\Eloquent\Builder<SectionItem>|SectionItem whereLink($value)
      * @method static \Illuminate\Database\Eloquent\Builder<SectionItem>|SectionItem whereButtonTextEn($value)

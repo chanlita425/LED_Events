@@ -42,68 +42,27 @@
         {{-- MAIN --}}
         <x-admin.nav-label>Main</x-admin.nav-label>
         <x-admin.nav-item route="admin.dashboard" icon="grid">Dashboard</x-admin.nav-item>
-
-        {{-- AUTH SYSTEM --}}
-        <x-admin.nav-label>Auth System</x-admin.nav-label>
-
         <x-admin.nav-item route="admin.users.index">Users</x-admin.nav-item>
-        {{-- <x-admin.nav-item route="admin.sessions.index">Sessions</x-admin.nav-item> --}}
-
+        <x-admin.nav-item route="admin.contact-messages.index">Contact</x-admin.nav-item>
+        
         {{-- CMS SYSTEM --}}
         <x-admin.nav-label>CMS System</x-admin.nav-label>
-        <x-admin.nav-item route="admin.pages.index">Pages</x-admin.nav-item>
-        <x-admin.nav-item route="admin.page-sections.index">Page Sections</x-admin.nav-item>
-        <x-admin.nav-item route="admin.section-items.index">Section Items</x-admin.nav-item>
-        <x-admin.nav-item route="admin.settings.index">Settings</x-admin.nav-item>
-
-        {{-- MEDIA SYSTEM --}}
-        {{-- <x-admin.nav-label>Media System</x-admin.nav-label>
-        <x-admin.nav-item route="admin.media.index">Media Files</x-admin.nav-item> --}}
-
-        {{-- NAVIGATION SYSTEM --}}
-        <x-admin.nav-label>Navigation System</x-admin.nav-label>
-        <x-admin.nav-item route="admin.menu-groups.index">Menu Groups</x-admin.nav-item>
-        <x-admin.nav-item route="admin.menus.index">Menus</x-admin.nav-item>
+        {{-- <x-admin.nav-item route="admin.pages.index">Pages</x-admin.nav-item> --}}
+        <x-admin.nav-item route="admin.page-sections.index">Banner Page</x-admin.nav-item>
+        
+        <x-admin.nav-item route="admin.sections.home_section">Home Section</x-admin.nav-item>
+        <x-admin.nav-item route="admin.sections.service_section">Service Section</x-admin.nav-item>
+        <x-admin.nav-item route="admin.sections.project_section">Project Section</x-admin.nav-item>
+        <x-admin.nav-item route="admin.sections.blog_section">Blog Section</x-admin.nav-item>
+        <x-admin.nav-item route="admin.sections.whyus_section">WhyUs Section</x-admin.nav-item>
+        <x-admin.nav-item route="admin.sections.media_section">Media Section</x-admin.nav-item>
 
         {{-- CONTACT SYSTEM --}}
-        <x-admin.nav-label>Contact System</x-admin.nav-label>
-        <x-admin.nav-item route="admin.contact-messages.index">Contact Messages</x-admin.nav-item>
-        {{-- <x-admin.nav-item route="admin.contact-info.index">Contact Info</x-admin.nav-item> --}}
-
-        {{-- TRACKING SYSTEM --}}
-        {{-- <x-admin.nav-label>Tracking System</x-admin.nav-label>
-        <x-admin.nav-item route="admin.activity-logs.index">Activity Logs</x-admin.nav-item> --}}
-
-        {{-- Legal --}}
-        <x-admin.nav-label>Legal</x-admin.nav-label>
-
-        @if ($legalPages->has('privacy-policy'))
-            @php $isPrivacy = request()->routeIs('privacy'); @endphp
-            <a href="{{ route('privacy') }}"
-               class="group flex items-center gap-3 mx-2 px-3 py-2 rounded-lg text-xs font-medium transition-all duration-150
-                      {{ $isPrivacy ? 'bg-orange-500/15 text-orange-400 border border-orange-500/20' : 'text-gray-400 hover:text-gray-200 hover:bg-white/5' }}">
-                <svg class="w-4 h-4 flex-shrink-0 {{ $isPrivacy ? 'text-orange-400' : 'text-gray-500 group-hover:text-gray-300' }}"
-                     fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
-                </svg>
-                <span class="truncate">{{ $legalPages['privacy-policy']->title_en }}</span>
-                @if($isPrivacy)<span class="ml-auto w-1.5 h-1.5 rounded-full bg-orange-500 flex-shrink-0"></span>@endif
-            </a>
-        @endif
-
-        @if ($legalPages->has('terms-of-service'))
-            @php $isTerms = request()->routeIs('terms'); @endphp
-            <a href="{{ route('terms') }}"
-               class="group flex items-center gap-3 mx-2 px-3 py-2 rounded-lg text-xs font-medium transition-all duration-150
-                      {{ $isTerms ? 'bg-orange-500/15 text-orange-400 border border-orange-500/20' : 'text-gray-400 hover:text-gray-200 hover:bg-white/5' }}">
-                <svg class="w-4 h-4 flex-shrink-0 {{ $isTerms ? 'text-orange-400' : 'text-gray-500 group-hover:text-gray-300' }}"
-                     fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                </svg>
-                <span class="truncate">{{ $legalPages['terms-of-service']->title_en }}</span>
-                @if($isTerms)<span class="ml-auto w-1.5 h-1.5 rounded-full bg-orange-500 flex-shrink-0"></span>@endif
-            </a>
-        @endif
+        <x-admin.nav-label>System</x-admin.nav-label>
+        <x-admin.nav-item route="admin.menu-groups.index">Menu Groups</x-admin.nav-item>
+        <x-admin.nav-item route="admin.menus.index">Menu items</x-admin.nav-item>
+        <x-admin.nav-item route="admin.section-items.index">Section Items</x-admin.nav-item>
+        <x-admin.nav-item route="admin.settings.index">Settings</x-admin.nav-item>
 
     </nav>
 
